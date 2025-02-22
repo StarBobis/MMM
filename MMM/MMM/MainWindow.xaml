@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="MMM.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MMM"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <!--云母效果窗口-->
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="BaseAlt"/>
+    </Window.SystemBackdrop>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush x:Name="MainWindowImageBrush" Stretch="UniformToFill" ImageSource="Assets/BackGround.png"></ImageBrush>
+        </Grid.Background>
+        
+        <NavigationView OpenPaneLength="200"  x:Name="nvSample" ItemInvoked="nvSample_ItemInvoked" IsBackEnabled="False" IsBackButtonVisible="Collapsed" PaneDisplayMode="LeftCompact">
+
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="NavigationViewItem_GamePage" Icon="Home" Content="游戏" Tag="GamePage" />
+                <NavigationViewItem x:Name="NavigationViewItem_ModPage" Icon="Edit" Content="Mod管理" Tag="ModPage" />
+                <NavigationViewItem x:Name="NavigationViewItem_CommunityPage" Icon="OtherUser" Content="社区" Tag="CommunityPage" />
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="contentFrame"/>
+        </NavigationView>
+    </Grid>
+  
+</Window>
