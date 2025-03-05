@@ -3,7 +3,8 @@
     x:Class="MMM.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MMM">
+    xmlns:local="using:MMM"
+    RequestedTheme="Dark">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,6 +23,8 @@
                 <GradientStop Color="Purple" Offset="1.0"/>
             </LinearGradientBrush>
 
+            <!-- 解决NavigationView的Content背景颜色昏暗的问题 -->
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

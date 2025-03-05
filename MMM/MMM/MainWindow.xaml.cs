@@ -36,14 +36,14 @@ namespace MMM
             CurrentWindow = this;
 
             //隐藏标题栏：
-            //this.ExtendsContentIntoTitleBar = true;
+            this.ExtendsContentIntoTitleBar = true;
 
             //设置标题
-            this.Title = "喵喵喵Mod加载器 V1.0.0.1";
+            this.Title = "喵喵喵Mod管理器 V1.0.0.1";
 
             //设置窗口大小
             //1111 814   
-            this.AppWindow.Resize(new SizeInt32(1132 + 16, 826 + 9));
+            this.AppWindow.Resize(new SizeInt32(1600 + 16, 900 + 9));
 
             //设置图标
             this.AppWindow.SetIcon("Assets/Nekko.ico");
