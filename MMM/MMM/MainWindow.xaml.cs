@@ -43,10 +43,10 @@ namespace MMM
 
             //设置窗口大小
             //1111 814   
-            this.AppWindow.Resize(new SizeInt32(1600 + 16, 900 + 9));
+            this.AppWindow.Resize(new SizeInt32(1200 + 16, 666 + 9));
 
             //设置图标
-            this.AppWindow.SetIcon("Assets/Nekko.ico");
+            this.AppWindow.SetIcon("Assets/Miao.ico");
 
             //默认进入主页界面 8
             if (nvSample.MenuItems.Count > 0)
@@ -54,6 +54,8 @@ namespace MMM
                 nvSample.SelectedItem = nvSample.MenuItems[0];
                 contentFrame.Navigate(typeof(GamePage));
             }
+
+            MoveWindowToCenterScreen();
         }
 
         private void MoveWindowToCenterScreen()
