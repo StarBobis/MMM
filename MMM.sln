@@ -7,6 +7,8 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "MMM (Package)", "MMM\MMM (P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMM", "MMM\MMM\MMM.csproj", "{62F7120C-DDDE-475B-AE46-E0E7F54C62BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMM-Core", "MMM-Core\MMM-Core.csproj", "{284F94CB-F379-4599-B306-469124C985CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -43,6 +45,18 @@ Global
 		{62F7120C-DDDE-475B-AE46-E0E7F54C62BD}.Release|x64.Build.0 = Release|x64
 		{62F7120C-DDDE-475B-AE46-E0E7F54C62BD}.Release|x86.ActiveCfg = Release|x86
 		{62F7120C-DDDE-475B-AE46-E0E7F54C62BD}.Release|x86.Build.0 = Release|x86
+		{284F94CB-F379-4599-B306-469124C985CB}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Debug|x64.Build.0 = Debug|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Debug|x86.Build.0 = Debug|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Release|ARM64.Build.0 = Release|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Release|x64.ActiveCfg = Release|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Release|x64.Build.0 = Release|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Release|x86.ActiveCfg = Release|Any CPU
+		{284F94CB-F379-4599-B306-469124C985CB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

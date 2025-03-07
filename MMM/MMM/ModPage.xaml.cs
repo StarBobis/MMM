@@ -14,21 +14,13 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
+using MMM_Core;
+using MMM.Helper;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace MMM
 {
-    public class CharacterItem
-    {
-        public string CharacterImage { get; set; } = "";
-        public string BackgroundImage { get; set; } = "";
-        public string Title { get; set; } = "";
-        public string Likes { get; set; } = "";
-
-    }
-
-
 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -43,34 +35,6 @@ namespace MMM
             this.InitializeComponent();
             StyledModGrid.ItemsSource = items;
 
-
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
-            AddNewCharacter();
             AddNewCharacter();
         }
 
@@ -81,10 +45,23 @@ namespace MMM
                 CharacterImage = "Assets/GI/HeroPicture/Funingna.png",
                 BackgroundImage = "Assets/GI/HeroBackground/Gold.png",
                 Title = "芙宁娜",
-                Likes = "3"
+                ModNumber = "0"
             };
 
             items.Add(item);
+        }
+
+        private async void StyledModGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //选中角色改变后，执行这里的方法。
+            if (StyledModGrid.SelectedItem != null)
+            {
+                //string selectedItem = StyledModGrid.SelectedItem.ToString();
+                //await MessageHelper.Show(selectedItem);
+
+                //选中后展示右侧Mod列表，Mod列表也是一个GridView
+
+            }
         }
 
 
