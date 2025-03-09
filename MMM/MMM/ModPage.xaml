@@ -116,9 +116,30 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
+            <!--Mod总数量显示-->
+
+            <TextBlock 
+                x:Name="TextBlockModNumber"
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="2" 
+                HorizontalAlignment="Center" 
+                Text="Mod总数量:"
+                Margin="0,15,0,0"
+                FontWeight="Bold"
+                FontSize="25"
+                >
+
+                <TextBlock.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="Yellow" Offset="0.0"/>
+                        <GradientStop Color="Green" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
 
             <!-- 顶部菜单 -->
             <MenuBar Grid.Row="0" Grid.Column="0" Margin="10,5,0,0">

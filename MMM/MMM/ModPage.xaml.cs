@@ -51,6 +51,8 @@ namespace MMM
         {
             CharacterItemShowList.Clear();
 
+            int totalModNumber = 0;
+
             List<CharacterItem> characterItems = ConfigHelper.GetGICharacterItemList();
             foreach (CharacterItem characterItem in characterItems)
             {
@@ -65,9 +67,13 @@ namespace MMM
                 string[] ModFiles = Directory.GetDirectories(characterModsPath);
                 characterItem.ModNumber = ModFiles.Length.ToString();
 
+                totalModNumber = totalModNumber + ModFiles.Length;
 
                 CharacterItemShowList.Add(characterItem);
             }
+
+            TextBlockModNumber.Text = "Mod×ÜÊýÁ¿: " + totalModNumber.ToString();
+
         }
 
 

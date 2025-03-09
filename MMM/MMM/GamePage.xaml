@@ -7,9 +7,89 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+      xmlns:mmm_core="using:MMM_Core"
     Background="Transparent">
 
+
+    <Page.Resources>
+        <DataTemplate x:Name="GameIconItemGridTemplate" x:DataType="mmm_core:GameIconItem" >
+            <Grid x:Name="ModShowGrid" Width="100" Height="100" AllowDrop="True">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image  Grid.Row="0" Source="{x:Bind GameIconImage}" Stretch="UniformToFill" Width="100" Height="82"/>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical"  >
+                    <StackPanel.Background>
+                        <AcrylicBrush 
+                             FallbackColor="#EE222222"
+                             TintColor="#222222"
+                             TintLuminosityOpacity="0.7"
+                             TintOpacity="0.0" />   
+                    </StackPanel.Background>
+                    <TextBlock HorizontalAlignment="Center" Text="{x:Bind GameName}" FontSize="12" FontWeight="Bold"/>
+                </StackPanel>
+
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--顶部菜单导航栏-->
+        <!-- The GridView used for this example is shown below. Setter properties are used to customize
+some parts of the GridViewItems (i.e. the margins). -->
+        <Border 
+            Margin="0,23" 
+            BorderBrush="Gray"  
+            BorderThickness="0" 
+            CornerRadius="5" 
+            Height="Auto"
+            Grid.Row="0" Grid.Column="0"
+            HorizontalAlignment="Center" 
+            Width="Auto">
+            
+            <GridView
+                x:Name="GameIconGridView"
+                ItemTemplate="{StaticResource GameIconItemGridTemplate}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                MaxHeight="300" MaxWidth="500"
+                SelectionChanged="GameIconGridView_SelectionChanged">
+                
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                        <Setter Property="Margin" Value="5,5, 5, 5"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
+The following sets the maximum # of items to show before wrapping.-->
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
+                       MaximumRowsOrColumns="5"
+                       Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+        </Border>
+        
 
     </Grid>
 </Page>

@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Navigation;
 using MMM_Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -29,6 +30,8 @@ namespace MMM
     {
         public static MainWindow CurrentWindow;
         public NavigationView navigationView => nvSample;
+
+        public ImageBrush mainWindowImageBrush => MainWindowImageBrush;
 
 
         public MainWindow()
@@ -65,7 +68,10 @@ namespace MMM
                 Directory.CreateDirectory(GlobalConfig.Path_ModsFolder);
             }
 
-
+            //GlobalConfig.SettingCfg.LoadConfig();
+            //Debug.WriteLine("µ±«∞”Œœ∑: " + GlobalConfig.SettingCfg.Value.GameName);
+        
+        
         }
 
         private void MoveWindowToCenterScreen()

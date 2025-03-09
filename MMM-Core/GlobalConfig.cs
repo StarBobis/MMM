@@ -75,57 +75,10 @@ namespace MMM_Core
     }
     public class BaseConfig { }
 
-    public class GameConfig : BaseConfig
-    {
-        //UI Behaviour
-        public bool Language { get; set; } = false;
-        public double WindowWidth { get; set; } = 1000;
-        public double WindowHeight { get; set; } = 600;
-        public int WindowPositionX { get; set; } = -1;
-        public int WindowPositionY { get; set; } = -1;
-
-        //public float GamePageBackGroundImageOpacity { get; set; } = 0.6f;
-        //public float WorkPageBackGroundImageOpacity { get; set; } = 0.3f;
-        //public float PluginPageBackGroundImageOpacity { get; set; } = 0.3f;
-        //public float TexturePageBackGroundImageOpacity { get; set; } = 0.3f;
-
-        public bool SimpleMode { get; set; } = false;
-
-        public bool StartToWorkPage { get; set; } = false;
-        public bool WindowTopMost { get; set; } = false;
-        //Others
-        public bool AutoCleanFrameAnalysisFolder { get; set; } = true;
-        public bool AutoCleanLogFile { get; set; } = true;
-        public int FrameAnalysisFolderReserveNumber { get; set; } = 1;
-        public int LogFileReserveNumber { get; set; } = 3;
-
-        // 生成Mod设置
-
-        public string ModSwitchKey { get; set; } = "\"x\",\"c\",\"v\",\"b\",\"n\",\"m\",\"j\",\"k\",\"l\",\"o\",\"p\",\"[\",\"]\",\"x\",\"c\",\"v\",\"b\",\"n\",\"m\",\"j\",\"k\",\"l\",\"o\",\"p\",\"[\",\"]\",\"x\",\"c\",\"v\",\"b\",\"n\",\"m\",\"j\",\"k\",\"l\",\"o\",\"p\",\"[\",\"]\"";
-
-
-        //Extract Options
-        public bool DontSplitModelByMatchFirstIndex { get; set; } = false;
-
-        //Texture Options
-        public bool AutoTextureOnlyConvertDiffuseMap { get; set; } = true;
-        public int AutoTextureFormat { get; set; } = 0;
-        public bool AutoDetectAndMarkTexture { get; set; } = true;
-
-        public string DBMT_Protect_ACLFolderPath { get; set; } = "";
-
-        public string DBMT_Protect_TargetModPath { get; set; } = "";
-
-    }
-
-
     public class MainSetting : BaseConfig
     {
-        public string GameName { get; set; } = "HSR";
-        public string WorkSpaceName { get; set; } = string.Empty;
+        public string GameName { get; set; } = "GI";
 
-        //DBMT位置
-        public string DBMTLocation { get; set; } = "";
     }
 
     public static class GlobalConfig
@@ -137,6 +90,7 @@ namespace MMM_Core
         {
             get { return Directory.GetCurrentDirectory(); }
         }
+
         public static string Path_AppDataLocal
         {
             get
