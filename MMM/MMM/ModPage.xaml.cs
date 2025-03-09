@@ -39,6 +39,8 @@ namespace MMM
         public ModPage()
         {
             this.InitializeComponent();
+
+
             StyledModGrid.ItemsSource = CharacterItemShowList;
             ModInfoGrid.ItemsSource = ModItemShowList;
 
@@ -264,6 +266,21 @@ namespace MMM
                 Debug.WriteLine("未找到控件");
             }
 
+        }
+
+        //不是很好的设计，因为用户可能会在移动鼠标的过程中选择错误。
+        private void CharacterGridViewItem_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is GridViewItem gridViewItem)
+            {
+                // 获取当前鼠标悬停的项的索引
+                var index = StyledModGrid.IndexFromContainer(gridViewItem);
+                if (index != -1)
+                {
+                    // 设置该项为选中状态
+                    StyledModGrid.SelectedIndex = index;
+                }
+            }
         }
     }
 }

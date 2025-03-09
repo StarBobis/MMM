@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml.Media.Imaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace MMM_Core
     {
         public string GameIconImage { get; set; } = "";
         public string GameName { get; set; } = "";
+
+        public BitmapImage GameBackGroundImage { get; set; } = new BitmapImage();
     }
 }

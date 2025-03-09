@@ -14,13 +14,8 @@
             <!-- Other app resources here -->
 
             <LinearGradientBrush x:Key="RainbowBorderBrush" StartPoint="0,0" EndPoint="1,0">
-                <GradientStop x:Name="RedStop" Color="Red" Offset="0.0"/>
-                <GradientStop Color="Orange" Offset="0.16"/>
-                <GradientStop Color="Yellow" Offset="0.33"/>
-                <GradientStop Color="Green" Offset="0.5"/>
-                <GradientStop Color="Cyan" Offset="0.66"/>
+                <GradientStop Color="Red" Offset="0.16"/>
                 <GradientStop Color="Blue" Offset="0.83"/>
-                <GradientStop Color="Purple" Offset="1.0"/>
             </LinearGradientBrush>
 
             <!-- 解决NavigationView的Content背景颜色昏暗的问题 -->

@@ -31,7 +31,7 @@ namespace MMM
         public static MainWindow CurrentWindow;
         public NavigationView navigationView => nvSample;
 
-        public ImageBrush mainWindowImageBrush => MainWindowImageBrush;
+        public Image mainWindowImageBrush => MainWindowImageBrush;
 
 
         public MainWindow()
@@ -47,16 +47,20 @@ namespace MMM
 
             //设置窗口大小
             //1111 814   
-            this.AppWindow.Resize(new SizeInt32(1354 + 16, 707 + 9));
+            this.AppWindow.Resize(new SizeInt32(1280 + 16, 720 + 9));
 
             //设置图标
             this.AppWindow.SetIcon("Assets/Miao.ico");
 
-            //默认进入主页界面 8
+            //默认进入设置界面 8
             if (nvSample.MenuItems.Count > 0)
             {
+                //nvSample.SelectedItem = nvSample.FooterMenuItems;
+                contentFrame.Navigate(typeof(SettingsPage));
+
                 nvSample.SelectedItem = nvSample.MenuItems[0];
                 contentFrame.Navigate(typeof(GamePage));
+
             }
 
             //屏幕显示到正中央

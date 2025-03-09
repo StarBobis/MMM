@@ -26,6 +26,8 @@ namespace MMM
         public CommunityPage()
         {
             this.InitializeComponent();
+
+
         }
     }
 }
