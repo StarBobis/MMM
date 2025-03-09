@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MMM_Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,7 +44,7 @@ namespace MMM
 
             //设置窗口大小
             //1111 814   
-            this.AppWindow.Resize(new SizeInt32(1200 + 16, 666 + 9));
+            this.AppWindow.Resize(new SizeInt32(1354 + 16, 707 + 9));
 
             //设置图标
             this.AppWindow.SetIcon("Assets/Miao.ico");
@@ -55,7 +56,16 @@ namespace MMM
                 contentFrame.Navigate(typeof(GamePage));
             }
 
+            //屏幕显示到正中央
             MoveWindowToCenterScreen();
+
+            //如果不存在Mods文件夹，则创建Mods文件夹
+            if (!Directory.Exists(GlobalConfig.Path_ModsFolder))
+            {
+                Directory.CreateDirectory(GlobalConfig.Path_ModsFolder);
+            }
+
+
         }
 
         private void MoveWindowToCenterScreen()

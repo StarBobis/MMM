@@ -156,6 +156,10 @@ namespace MMM_Core
             get { return Path.Combine(Path_Base, "Configs\\"); }
         }
 
+        public static string Path_ModsFolder
+        {
+            get { return Path.Combine(Path_Base, "Mods\\"); }
+        }
 
 
 

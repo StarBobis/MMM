@@ -10,8 +10,14 @@ namespace MMM_Core
     {
         public string CharacterImage { get; set; } = "";
         public string BackgroundImage { get; set; } = "";
-        public string Title { get; set; } = "";
+        public string CharacterName { get; set; } = "";
+
+        /// <summary>
+        /// 实时读取对应文件夹下面的数量
+        /// </summary>
         public string ModNumber { get; set; } = "";
+
+        public string Category { get; set; } = "";
 
     }
 
