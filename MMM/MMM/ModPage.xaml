@@ -25,6 +25,7 @@
                     <Grid.ContextFlyout>
                         <MenuFlyout >
                             <MenuFlyoutItem x:Name="Menu_OpenCharacterFolder" Text="打开存储文件夹" Click="Menu_OpenCharacterFolder_Click" />
+                            
                             <!--<MenuFlyoutItem x:Name="Menu_AddToFavourite" Text="添加到收藏" />-->
                         </MenuFlyout>
                     </Grid.ContextFlyout>
@@ -152,6 +153,8 @@ TintOpacity="0.0" />
                 <MenuBarItem Title="文件" x:Name="Menu_File">
 
                     <MenuFlyoutItem x:Name="Menu_OpenModsRepositoryFolder" Text="打开Mod仓库" Click="Menu_OpenModsRepositoryFolder_Click"/>
+                    <MenuFlyoutItem x:Name="Menu_ConfigsFolder" Text="打开配置文件夹" Click="Menu_ConfigsFolder_Click" />
+
                     <MenuFlyoutSeparator />
                 </MenuBarItem>
             </MenuBar>

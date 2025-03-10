@@ -282,5 +282,13 @@ namespace MMM
                 }
             }
         }
+
+        private async void Menu_ConfigsFolder_Click(object sender, RoutedEventArgs e)
+        {
+            await CommandHelper.ShellOpenFolder(GlobalConfig.Path_ConfigsFolder);
+        }
+
+
+
     }
 }

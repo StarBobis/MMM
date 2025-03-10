@@ -8,7 +8,9 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
+using MMM.Helper;
 using MMM_Core;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -138,9 +140,25 @@ namespace MMM
 
         }
 
+
+        public GameIconItem GetCurrentSelectedGameIconItem()
+        {
+            if (GameIconGridView.SelectedItem != null)
+            {
+
+                int index = GameIconGridView.SelectedIndex;
+                GameIconItem gameIconItem = GameIconItemList[index];
+                return gameIconItem;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         private void GameIconGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //选中角色改变后，执行这里的方法。
+            //选中游戏改变后，执行这里的方法。
             if (GameIconGridView.SelectedItem != null)
             {
 
@@ -160,6 +178,28 @@ namespace MMM
                 CreateFadeAnimation();
                 MainWindow.CurrentWindow.mainWindowImageBrush.Source = gameIconItem.GameBackGroundImage;
                 // VisualStateManager.GoToState(MainWindow.CurrentWindow.mainWindowImageBrush, "NewState", true);
+
+                //如果存在配置文件存储了3Dmigoto路径则读取，如果没有就算了
+                if (File.Exists(GlobalConfig.Path_CurrentGameMainConfigJsonFile))
+                {
+                    JObject jObject = MMMJsonUtils.ReadJObjectFromFile(GlobalConfig.Path_CurrentGameMainConfigJsonFile);
+                    string MigotoFolder = (string)jObject["MigotoFolder"];
+                    MigotoPathTextBox.Text = MigotoFolder;
+
+                    //读取d3dx.ini中的配置
+                    ReadPathSettingFromD3dxIni(Path.Combine(MigotoFolder,"d3dx.ini"));
+                }
+                else
+                {
+                    //如果没有，那必须清空当前的所有配置
+
+                    MigotoPathTextBox.Text = "";
+
+                    ProcessPathTextBox.Text = "";
+                    StarterPathTextBox.Text = "";
+                    TextBox_LaunchArgs.Text = "";
+                }
+                
             }
 
         }
@@ -180,5 +220,75 @@ namespace MMM
             }
         }
 
+
+        public void ReadPathSettingFromD3dxIni(string d3dxini_path)
+        {
+            ProcessPathTextBox.Text = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path,"target").Trim();
+            StarterPathTextBox.Text = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path,"launch").Trim();
+            TextBox_LaunchArgs.Text = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path, "launch_args").Trim();
+
+            //开发版本中Dev为0或不设置此字段，则说明显示红字。
+            string DevStr = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path, "dev").Trim();
+            if (DevStr.Trim() == "1")
+            {
+                ToggleSwitch_ShowWarning.IsOn = false;
+            }
+            else if (DevStr.Trim() == "0")
+            {
+                ToggleSwitch_ShowWarning.IsOn = true;
+            }
+            else
+            {
+                ToggleSwitch_ShowWarning.IsOn = false;
+            }
+        }
+
+        private async void Button_Choose3DmigotoFolder_Click(object sender, RoutedEventArgs e)
+        {
+            string folderPath = await CommandHelper.ChooseFolderAndGetPath();
+            if (folderPath != "")
+            {
+                MigotoPathTextBox.Text = folderPath;
+            }
+            else
+            {
+                return;
+            }
+
+            string d3dxini_path = Path.Combine(folderPath, "d3dx.ini");
+            if (!File.Exists(d3dxini_path))
+            {
+                _ = MessageHelper.Show("您当前选中的目录中并未含有d3dx.ini配置文件，请确认您是否选中了正确的3Dmigoto目录。");
+            }
+            else
+            {
+                //读取配置
+                ReadPathSettingFromD3dxIni(d3dxini_path);
+                //把当前游戏的配置保存到Configs文件夹下
+                GameIconItem gameIconItem = GetCurrentSelectedGameIconItem();
+                gameIconItem.MigotoFolder = folderPath;
+
+                gameIconItem.SaveToJson(GlobalConfig.Path_CurrentGameMainConfigJsonFile);
+            }
+
+
+
+        }
+
+        private void Button_InitializePath_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessPathTextBox.Text = "";
+            StarterPathTextBox.Text = "";
+            TextBox_LaunchArgs.Text = "";
+        }
+
+        private async void Button_ChooseProcessFile_Click(object sender, RoutedEventArgs e)
+        {
+            string filepath = await CommandHelper.ChooseFileAndGetPath(".exe");
+            if (filepath != "")
+            {
+                ProcessPathTextBox.Text = filepath;
+            }
+        }
     }
 }

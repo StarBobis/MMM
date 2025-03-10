@@ -168,10 +168,18 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 <StackPanel Grid.Row="1" Orientation="Horizontal"  Margin="10,0,20,10" ToolTipService.ToolTip="一般为游戏的3Dmigoto路径，默认使用MMM自带的3Dmigoto也可以选择其它启动器的">
                     <TextBlock x:Name="TextBlock_Choose3DmigotoPath" Text="3Dmigoto路径:" VerticalAlignment="Center" Margin="10,0,10,0" Foreground="White"/>
                     <TextBox x:Name="MigotoPathTextBox" Width="440" />
-                    <Button VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="10,0,0,0">
+                    <Button 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right" 
+                        Margin="10,0,0,0"
+                        x:Name="Button_Choose3DmigotoFolder"
+                        Click="Button_Choose3DmigotoFolder_Click">
                         <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="OpenFile" />
-                            <TextBlock x:Name="TextBlock_Choose3DmigotoFolder" Text="选择3Dmigoto文件夹" VerticalAlignment="Center" />
+                            <SymbolIcon Symbol="OpenLocal" />
+                            <TextBlock 
+                                x:Name="TextBlock_Choose3DmigotoFolder" 
+                                Text="选择3Dmigoto文件夹" 
+                                VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
@@ -180,7 +188,12 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,0,20,10" ToolTipService.ToolTip="一般为游戏的主程序进程路径，可以在任务管理器中查看">
                     <TextBlock x:Name="TextBlock_ChooseProcessPath" Text="进程路径:" VerticalAlignment="Center" Margin="10,0,10,0" Foreground="White"/>
                     <TextBox x:Name="ProcessPathTextBox" Width="550"/>
-                    <Button VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="10,0,0,0" >
+                    <Button 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"  
+                        Margin="10,0,0,0" 
+                        x:Name="Button_ChooseProcessFile"
+                        Click="Button_ChooseProcessFile_Click">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="OpenFile" />
                             <TextBlock x:Name="TextBlock_ChooseProcessFile" Text="选择文件" VerticalAlignment="Center"/>
@@ -216,7 +229,7 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Right" 
                 Margin="0,0,10,10" 
-                
+                Click="Button_InitializePath_Click"
                 ToolTipService.ToolTip="清除当前填写的所有配置，方便重新填写"/>
                     <Button 
                 x:Name="Button_SaveConfig" 

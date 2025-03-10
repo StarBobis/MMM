@@ -115,7 +115,10 @@ namespace MMM_Core
             get { return Path.Combine(Path_Base, "Mods\\"); }
         }
 
-
+        public static string Path_CurrentGameMainConfigJsonFile
+        {
+            get { return Path.Combine(Path_ConfigsFolder, GlobalConfig.SettingCfg.Value.GameName + "\\MainConfig.json"); }
+        }
 
     }
 

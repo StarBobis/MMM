@@ -72,10 +72,15 @@ namespace MMM
                 Directory.CreateDirectory(GlobalConfig.Path_ModsFolder);
             }
 
+            if (!Directory.Exists(GlobalConfig.Path_ConfigsFolder))
+            {
+                Directory.CreateDirectory(GlobalConfig.Path_ConfigsFolder);
+            }
+
             //GlobalConfig.SettingCfg.LoadConfig();
             //Debug.WriteLine("µ±«∞”Œœ∑: " + GlobalConfig.SettingCfg.Value.GameName);
-        
-        
+
+
         }
 
         private void MoveWindowToCenterScreen()

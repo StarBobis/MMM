@@ -5,6 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers;
+using Windows.Storage;
+using WinRT.Interop;
 
 namespace MMM.Helper
 {
@@ -88,6 +91,77 @@ namespace MMM.Helper
                 await MessageHelper.Show("Error: " + ex.ToString());
                 return false;
             }
+
+        }
+
+        public static FileOpenPicker Get_FileOpenPicker(string Suffix)
+        {
+            FileOpenPicker picker = new FileOpenPicker();
+            // 获取当前窗口的HWND
+            nint windowHandle = WindowNative.GetWindowHandle(App.m_window);
+            InitializeWithWindow.Initialize(picker, windowHandle);
+
+            picker.ViewMode = PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = PickerLocationId.Desktop;
+            picker.FileTypeFilter.Add(Suffix);
+            return picker;
+        }
+
+        public static FolderPicker Get_FolderPicker()
+        {
+            FolderPicker picker = new FolderPicker();
+            // 获取当前窗口的HWND
+            nint windowHandle = WindowNative.GetWindowHandle(App.m_window);
+            InitializeWithWindow.Initialize(picker, windowHandle);
+
+            picker.ViewMode = PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = PickerLocationId.Desktop;
+            return picker;
+        }
+
+        public static async Task<string> ChooseFileAndGetPath(string Suffix)
+        {
+            try
+            {
+                FileOpenPicker picker = CommandHelper.Get_FileOpenPicker(Suffix);
+                StorageFile file = await picker.PickSingleFileAsync();
+                if (file != null)
+                {
+                    return file.Path;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception exception)
+            {
+                await MessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开DBMT。\n" + exception.ToString(), "This functio can't run on admin user please use normal user to open DBMT. \n" + exception.ToString());
+            }
+            return "";
+        }
+
+        public static async Task<string> ChooseFolderAndGetPath()
+        {
+            try
+            {
+                FolderPicker folderPicker = CommandHelper.Get_FolderPicker();
+                folderPicker.FileTypeFilter.Add("*");
+                StorageFolder folder = await folderPicker.PickSingleFolderAsync();
+                if (folder != null)
+                {
+                    return folder.Path;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception exception)
+            {
+                await MessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开DBMT。\n" + exception.ToString());
+            }
+            return "";
 
         }
 
