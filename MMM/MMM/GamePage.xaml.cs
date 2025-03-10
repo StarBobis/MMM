@@ -21,6 +21,7 @@ using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using static System.Net.Mime.MediaTypeNames;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -34,6 +35,7 @@ namespace MMM
     public sealed partial class GamePage : Page
     {
         private ObservableCollection<GameIconItem> GameIconItemList = new ObservableCollection<GameIconItem>();
+        private ObservableCollection<InfoBarItem> InfoBarItemList = new ObservableCollection<InfoBarItem>();
         private Compositor compositor;
         private Visual imageVisual;
 
@@ -51,8 +53,10 @@ namespace MMM
             GlobalConfig.SettingCfg.LoadConfig();
 
             GameIconGridView.ItemsSource = GameIconItemList;
+            InfoBarGridView.ItemsSource = InfoBarItemList;
 
             AddGameIcon();
+            AddInfoBarIcon();
 
             //根据当前配置中存储的游戏名称，依次匹配GameIconItemList
 
@@ -79,6 +83,46 @@ namespace MMM
 
             // 如果需要，可以调用基类的 OnNavigatedFrom 方法
             base.OnNavigatedFrom(e);
+        }
+
+        public void AddInfoBarIcon()
+        {
+
+            InfoBarItemList.Add(new InfoBarItem
+            {
+                Link = "",
+                Description = "加入QQ群",
+                IconImage = "Assets/InfoBarIcon/QQGroup.png",
+            });
+
+            InfoBarItemList.Add(new InfoBarItem
+            {
+                Link = "https://discord.gg/sMdsGAptss",
+                Description = "加入Discord",
+                IconImage = "Assets/InfoBarIcon/Discord.png",
+            });
+
+            InfoBarItemList.Add(new InfoBarItem
+            {
+                Link = "https://github.com/StarBobis/MMM",
+                Description = "打开Github更新地址",
+                IconImage = "Assets/InfoBarIcon/Github.png",
+            });
+
+            InfoBarItemList.Add(new InfoBarItem
+            {
+                Link = "https://github.com/StarBobis/MMM/issues",
+                Description = "打开Github的Issue界面提交反馈和改进建议",
+                IconImage = "Assets/InfoBarIcon/Feedback.png",
+            });
+
+            //InfoBarItemList.Add(new InfoBarItem
+            //{
+            //    Link = "https://afdian.com/a/NicoMico666",
+            //    Description = "赞助作者NicoMico开发工具",
+            //    IconImage = "Assets/InfoBarIcon/Love.png",
+            //});
+
         }
 
         public void AddGameIcon()
@@ -401,6 +445,21 @@ namespace MMM
                 await CommandHelper.ShellOpenFile(MigotoLoaderExePath2);
             }
 
+        }
+
+        private void GridViewItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            if (InfoBarGridView.SelectedItem != null)
+            {
+
+                int index = InfoBarGridView.SelectedIndex;
+                InfoBarItem infoBarItem = InfoBarItemList[index];
+                string link = infoBarItem.Link;
+                if (!string.IsNullOrEmpty(link))
+                {
+                    IAsyncOperation<bool> asyncOperation = Launcher.LaunchUriAsync(new Uri(link));
+                }
+            }
         }
     }
 }

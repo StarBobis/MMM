@@ -33,25 +33,52 @@ namespace MMM
     public sealed partial class ModPage : Page
     {
 
-        private ObservableCollection<CharacterItem> CharacterItemShowList = new ObservableCollection<CharacterItem>();
-        private ObservableCollection<ModItem> ModItemShowList = new ObservableCollection<ModItem>();
+        private ObservableCollection<CharacterItem> CharacterItemList = new ObservableCollection<CharacterItem>();
+        private ObservableCollection<ModItem> ModItemList = new ObservableCollection<ModItem>();
+        private ObservableCollection<CategoryItem> CategoryItemList = new ObservableCollection<CategoryItem>();
 
         public ModPage()
         {
             this.InitializeComponent();
 
+            //设置各个GridView的数据源
+            CharacterItemGridView.ItemsSource = CharacterItemList;
+            ModItemGridView.ItemsSource = ModItemList;
+            CategoryItemGridView.ItemsSource = CategoryItemList;
 
-            StyledModGrid.ItemsSource = CharacterItemShowList;
-            ModInfoGrid.ItemsSource = ModItemShowList;
-
+            //添加原神角色用于测试，后续需要修改
+            AddNewCategory();
             AddNewCharacter();
 
-            StyledModGrid.SelectedIndex = 0;
+            //默认选中第一个角色
+            CharacterItemGridView.SelectedIndex = 0;
+        }
+
+
+        public void AddNewCategory()
+        {
+            CategoryItemList.Add(new CategoryItem
+            {
+                CategoryImage = "Assets/GI/CategoryImage/角色.png",
+                CategoryNameName = "角色"
+            });
+
+            CategoryItemList.Add(new CategoryItem
+            {
+                CategoryImage = "Assets/GI/CategoryImage/武器.png",
+                CategoryNameName = "武器"
+            });
+
+            CategoryItemList.Add(new CategoryItem
+            {
+                CategoryImage = "Assets/GI/CategoryImage/添加.png",
+                CategoryNameName = "添加"
+            });
         }
 
         public void AddNewCharacter()
         {
-            CharacterItemShowList.Clear();
+            CharacterItemList.Clear();
 
             int totalModNumber = 0;
 
@@ -71,7 +98,7 @@ namespace MMM
 
                 totalModNumber = totalModNumber + ModFiles.Length;
 
-                CharacterItemShowList.Add(characterItem);
+                CharacterItemList.Add(characterItem);
             }
 
             TextBlockModNumber.Text = "Mod总数量: " + totalModNumber.ToString();
@@ -83,12 +110,12 @@ namespace MMM
         private void RefreshModInfoGrid()
         {
             //选中角色改变后，执行这里的方法。
-            if (StyledModGrid.SelectedItem != null)
+            if (CharacterItemGridView.SelectedItem != null)
             {
-                ModItemShowList.Clear();
+                ModItemList.Clear();
 
-                int index = StyledModGrid.SelectedIndex;
-                CharacterItem characterItem = CharacterItemShowList[index];
+                int index = CharacterItemGridView.SelectedIndex;
+                CharacterItem characterItem = CharacterItemList[index];
 
                 string characterName = characterItem.CharacterName;
 
@@ -108,7 +135,7 @@ namespace MMM
                     modItem.ModImage = characterItem.CharacterImage;
                     modItem.ModName = Path.GetFileName(SingleModFolderPath);
                     modItem.ModLoaction = SingleModFolderPath;
-                    ModItemShowList.Add(modItem);
+                    ModItemList.Add(modItem);
 
                     //获取下面的所有文件，如果有以.png后缀的则作为Image,目前只识别第一个
                     string[] SingleModFiles = Directory.GetFiles(SingleModFolderPath);
@@ -140,10 +167,10 @@ namespace MMM
         private async void Menu_OpenCharacterFolder_Click(object sender, RoutedEventArgs e)
         {
             //选中角色改变后，执行这里的方法。
-            if (StyledModGrid.SelectedItem != null)
+            if (CharacterItemGridView.SelectedItem != null)
             {
-                int index = StyledModGrid.SelectedIndex;
-                CharacterItem characterItem = CharacterItemShowList[index];
+                int index = CharacterItemGridView.SelectedIndex;
+                CharacterItem characterItem = CharacterItemList[index];
 
                 string characterName = characterItem.CharacterName;
 
@@ -155,10 +182,10 @@ namespace MMM
 
         private async void Menu_ModLocationFolder_Click(object sender, RoutedEventArgs e)
         {
-            if (ModInfoGrid.SelectedItem != null)
+            if (ModItemGridView.SelectedItem != null)
             {
-                int index = ModInfoGrid.SelectedIndex;
-                ModItem modItem = ModItemShowList[index];
+                int index = ModItemGridView.SelectedIndex;
+                ModItem modItem = ModItemList[index];
                 //Debug.WriteLine(modItem.ModLoaction);
                 await CommandHelper.ShellOpenFolder(modItem.ModLoaction);
 
@@ -274,11 +301,11 @@ namespace MMM
             if (sender is GridViewItem gridViewItem)
             {
                 // 获取当前鼠标悬停的项的索引
-                var index = StyledModGrid.IndexFromContainer(gridViewItem);
+                var index = CharacterItemGridView.IndexFromContainer(gridViewItem);
                 if (index != -1)
                 {
                     // 设置该项为选中状态
-                    StyledModGrid.SelectedIndex = index;
+                    CharacterItemGridView.SelectedIndex = index;
                 }
             }
         }

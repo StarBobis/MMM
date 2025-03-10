@@ -10,111 +10,12 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <Page.Resources>
-        <DataTemplate x:Name="CharacterGridTemplate" x:DataType="mmm_core:CharacterItem">
-            <GridViewItem>
-                <Grid Width="110" Height="148">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.ContextFlyout>
-                        <MenuFlyout >
-                            <MenuFlyoutItem x:Name="Menu_OpenCharacterFolder" Text="打开存储文件夹" Click="Menu_OpenCharacterFolder_Click" />
-                            
-                            <!--<MenuFlyoutItem x:Name="Menu_AddToFavourite" Text="添加到收藏" />-->
-                        </MenuFlyout>
-                    </Grid.ContextFlyout>
-
-                    <Image Grid.Row="0" Source="{x:Bind BackgroundImage}" Stretch="UniformToFill" Width="110" Height="110" Opacity="0.9"/>
-                    <Image Grid.Row="0" Source="{x:Bind CharacterImage}" Stretch="UniformToFill" Width="110" Height="110"/>
-
-                    <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" >
-                        <StackPanel.Background>
-                            <AcrylicBrush 
-  FallbackColor="#EE222222"
-  TintColor="#222222"
-  TintLuminosityOpacity="0.7"
-  TintOpacity="0.0" />
-                        </StackPanel.Background>
-
-                        <TextBlock HorizontalAlignment="Center" Text="{x:Bind CharacterName}" FontWeight="Bold"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <TextBlock 
-                 Text="Mod数量: " 
-                 Style="{ThemeResource CaptionTextBlockStyle}" 
-                 Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                            <TextBlock 
-                 Text="{x:Bind ModNumber}" 
-                 Style="{ThemeResource CaptionTextBlockStyle}" 
-                 Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                        </StackPanel>
-                    </StackPanel>
-
-                </Grid>
-
-            </GridViewItem>
-        </DataTemplate>
-
-
-        <DataTemplate x:Name="ModItemGridTemplate" x:DataType="mmm_core:ModItem" >
-            <GridViewItem>
-                <Grid x:Name="ModShowGrid" Width="200" Height="200" AllowDrop="True" DragOver="ModShowGrid_DragOver" Drop="ModShowGrid_Drop">
-                    <Grid.ContextFlyout>
-                        <MenuFlyout >
-                            <MenuFlyoutItem x:Name="Menu_ModLocationFolder" Text="打开该Mod所在文件夹" Click="Menu_ModLocationFolder_Click" />
-                            <!--<MenuFlyoutItem x:Name="Menu_UseThisMod" Text="启用该Mod" />
-                   <MenuFlyoutItem x:Name="Menu_ModDetailInfo" Text="查看Mod详细信息" />-->
-                        </MenuFlyout>
-                    </Grid.ContextFlyout>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Image  Grid.Row="0" Source="{x:Bind ModImage}" Stretch="UniformToFill" Width="200" Height="180"/>
-
-                    <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" >
-                        <StackPanel.Background>
-                            <AcrylicBrush 
-FallbackColor="#EE222222"
-TintColor="#222222"
-TintLuminosityOpacity="0.7"
-TintOpacity="0.0" />
-                        </StackPanel.Background>
-
-                        <TextBlock HorizontalAlignment="Center" Text="{x:Bind ModName}" FontWeight="Bold"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <TextBlock 
-               Text="作者: " 
-               Style="{ThemeResource CaptionTextBlockStyle}" 
-               Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                            <TextBlock 
-               Text="{x:Bind ModAuthor}" 
-               Style="{ThemeResource CaptionTextBlockStyle}" 
-               Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                        </StackPanel>
-                    </StackPanel>
-
-                </Grid>
-            </GridViewItem>
-        </DataTemplate>
-    </Page.Resources>
-
     <ScrollViewer VerticalScrollBarVisibility="Auto"  Background="#80000000">
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -126,7 +27,6 @@ TintOpacity="0.0" />
             </Grid.ColumnDefinitions>
             
             <!--Mod总数量显示-->
-
             <TextBlock 
                 x:Name="TextBlockModNumber"
                 Grid.Row="0" 
@@ -136,8 +36,7 @@ TintOpacity="0.0" />
                 Text="Mod总数量:"
                 Margin="0,15,0,0"
                 FontWeight="Bold"
-                FontSize="25"
-                >
+                FontSize="25">
 
                 <TextBlock.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -149,69 +48,238 @@ TintOpacity="0.0" />
 
             <!-- 顶部菜单 -->
             <MenuBar Grid.Row="0" Grid.Column="0" Margin="10,5,0,0">
-
                 <MenuBarItem Title="文件" x:Name="Menu_File">
-
                     <MenuFlyoutItem x:Name="Menu_OpenModsRepositoryFolder" Text="打开Mod仓库" Click="Menu_OpenModsRepositoryFolder_Click"/>
                     <MenuFlyoutItem x:Name="Menu_ConfigsFolder" Text="打开配置文件夹" Click="Menu_ConfigsFolder_Click" />
-
                     <MenuFlyoutSeparator />
                 </MenuBarItem>
             </MenuBar>
-
-            <!-- The GridView used for this example is shown below. Setter properties are used to customize
-some parts of the GridViewItems (i.e. the margins). -->
-            <GridView
+            
+            
+            <!--用于显示分类Category的GridView-->
+            <Border   
                 Grid.Row="1"
                 Grid.Column="0"
-                x:Name="StyledModGrid"
                 Margin="20,10"
-                ItemTemplate="{StaticResource CharacterGridTemplate}"
+                Width="Auto" 
+                HorizontalAlignment="Left"  
+                BorderThickness="1" CornerRadius="5" BorderBrush="White">
+                
+                <GridView
+               
+                x:Name="CategoryItemGridView"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                MaxHeight="635"
-                SelectionChanged="StyledModGrid_SelectionChanged">   
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
-                        <Setter Property="Margin" Value="5,5, 5, 5"/>
-                    </Style>
-                </GridView.ItemContainerStyle>
-                <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
-    The following sets the maximum # of items to show before wrapping.-->
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
-                           MaximumRowsOrColumns="4"
-                           Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-            </GridView>
+                MaxHeight="300" MaxWidth="500"
+                >
 
-            <!-- The GridView used for this example is shown below. Setter properties are used to customize
+                    <GridView.ItemTemplate>
+                        <DataTemplate  x:DataType="mmm_core:CategoryItem" >
+                            <GridViewItem>
+
+                                <Grid x:Name="ModShowGrid" Width="80" Height="80" AllowDrop="True" >
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image  Grid.Row="0" Source="{x:Bind CategoryImage}" Stretch="Fill" Width="80" Height="80"/>
+
+                                    <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Bottom" Height="20" >
+                                        <StackPanel.Background>
+                                            <AcrylicBrush 
+                                              FallbackColor="#EE222222"
+                                              TintColor="#222222"
+                                              TintLuminosityOpacity="0.7"
+                                              TintOpacity="0.0" />
+                                        </StackPanel.Background>
+                                        <TextBlock HorizontalAlignment="Center" Margin="1" VerticalAlignment="Bottom" Text="{x:Bind CategoryNameName}" FontSize="11" FontWeight="Bold"/>
+                                    </StackPanel>
+
+                                </Grid>
+                            </GridViewItem>
+
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                            <Setter Property="Margin" Value="5,5, 5, 5"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
+The following sets the maximum # of items to show before wrapping.-->
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
+                       MaximumRowsOrColumns="5"
+                       Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </Border>
+            <!--用于角色展示的GridView-->
+            <Border   
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20,0"
+                Width="Auto" 
+                Height="500"
+                HorizontalAlignment="Left"  
+                BorderThickness="1" CornerRadius="5" BorderBrush="White">
+                <!-- The GridView used for this example is shown below. Setter properties are used to customize
 some parts of the GridViewItems (i.e. the margins). -->
-            <GridView
+                <GridView
+                x:Name="CharacterItemGridView"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectionChanged="StyledModGrid_SelectionChanged">
+
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:Name="CharacterGridTemplate" x:DataType="mmm_core:CharacterItem">
+                            <GridViewItem>
+                                <Grid Width="110" Height="148">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.ContextFlyout>
+                                        <MenuFlyout >
+                                            <MenuFlyoutItem x:Name="Menu_OpenCharacterFolder" Text="打开存储文件夹" Click="Menu_OpenCharacterFolder_Click" />
+
+                                            <!--<MenuFlyoutItem x:Name="Menu_AddToFavourite" Text="添加到收藏" />-->
+                                        </MenuFlyout>
+                                    </Grid.ContextFlyout>
+
+                                    <Image Grid.Row="0" Source="{x:Bind BackgroundImage}" Stretch="UniformToFill" Width="110" Height="110" Opacity="0.9"/>
+                                    <Image Grid.Row="0" Source="{x:Bind CharacterImage}" Stretch="UniformToFill" Width="110" Height="110"/>
+
+                                    <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" >
+                                        <StackPanel.Background>
+                                            <AcrylicBrush 
+                                             FallbackColor="#EE222222"
+                                             TintColor="#222222"
+                                             TintLuminosityOpacity="0.7"
+                                             TintOpacity="0.0" />
+                                        </StackPanel.Background>
+
+                                        <TextBlock HorizontalAlignment="Center" Text="{x:Bind CharacterName}" FontWeight="Bold"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                            <TextBlock 
+                                            Text="Mod数量: " 
+                                            Style="{ThemeResource CaptionTextBlockStyle}" 
+                                            Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                            <TextBlock 
+                                            Text="{x:Bind ModNumber}" 
+                                            Style="{ThemeResource CaptionTextBlockStyle}" 
+                                            Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </GridViewItem>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                            <Setter Property="Margin" Value="5,5, 5, 5"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
+    The following sets the maximum # of items to show before wrapping.-->
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </Border>
+
+            <Border   
                 Grid.Row="1"
                 Grid.Column="1"
-                x:Name="ModInfoGrid"
-                Margin="0,10"
-                ItemTemplate="{StaticResource ModItemGridTemplate}"
+                Grid.RowSpan="2"
+                Margin="30,30"
+                HorizontalAlignment="Left"  
+                BorderThickness="1" 
+                CornerRadius="5" 
+                Width="Auto"
+                Height="620"
+                BorderBrush="White">
+                <!-- The GridView used for this example is shown below. Setter properties are used to customize
+some parts of the GridViewItems (i.e. the margins). -->
+                <GridView
+                x:Name="ModItemGridView"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                MaxHeight="635"
                 >
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
-                        <Setter Property="Margin" Value="5,5, 5, 5"/>
-                    </Style>
-                </GridView.ItemContainerStyle>
-                <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:Name="ModItemGridTemplate" x:DataType="mmm_core:ModItem" >
+                            <GridViewItem>
+                                <Grid x:Name="ModShowGrid" Width="200" Height="200" AllowDrop="True" DragOver="ModShowGrid_DragOver" Drop="ModShowGrid_Drop">
+                                    <Grid.ContextFlyout>
+                                        <MenuFlyout >
+                                            <MenuFlyoutItem x:Name="Menu_ModLocationFolder" Text="打开该Mod所在文件夹" Click="Menu_ModLocationFolder_Click" />
+                                            <!--<MenuFlyoutItem x:Name="Menu_UseThisMod" Text="启用该Mod" />
+                   <MenuFlyoutItem x:Name="Menu_ModDetailInfo" Text="查看Mod详细信息" />-->
+                                        </MenuFlyout>
+                                    </Grid.ContextFlyout>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image  Grid.Row="0" Source="{x:Bind ModImage}" Stretch="UniformToFill" Width="200" Height="180"/>
+
+                                    <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" >
+                                        <StackPanel.Background>
+                                            <AcrylicBrush 
+                                            FallbackColor="#EE222222"
+                                            TintColor="#222222"
+                                            TintLuminosityOpacity="0.7"
+                                            TintOpacity="0.0" />
+                                        </StackPanel.Background>
+
+                                        <TextBlock HorizontalAlignment="Center" Text="{x:Bind ModName}" FontWeight="Bold"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                            <TextBlock 
+                                           Text="作者: " 
+                                           Style="{ThemeResource CaptionTextBlockStyle}" 
+                                           Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                            <TextBlock 
+                                           Text="{x:Bind ModAuthor}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}" 
+                                           Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </GridViewItem>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                            <Setter Property="Margin" Value="5,5, 5, 5"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
     The following sets the maximum # of items to show before wrapping.-->
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
-                           MaximumRowsOrColumns="3"
-                           Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-            </GridView>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="3" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </Border>
+            
+            
 
         </Grid>
 
