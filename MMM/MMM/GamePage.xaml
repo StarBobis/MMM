@@ -88,7 +88,7 @@ The following sets the maximum # of items to show before wrapping.-->
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
-                       MaximumRowsOrColumns="4"
+                       MaximumRowsOrColumns="5"
                        Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
@@ -107,7 +107,7 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
     
                 Width="200"
                 Content="开始游戏" 
-                
+                Click="Button_Run3DmigotoLoader_Click"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right">
             </Button>
@@ -153,12 +153,20 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
 
                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                         <ToggleSwitch 
-                    VerticalAlignment="Center" 
-                    Margin="10" 
-                    x:Name="ToggleSwitch_ShowWarning" 
-                    OnContent="屏蔽游戏内红字" 
-                    OffContent="显示游戏内红字" 
-                    ToolTipService.ToolTip="开启后游戏中将不会显示红字报错，适用于纯享游戏，关闭后将显示红字报错"/>
+                            VerticalAlignment="Center" 
+                            Margin="10" 
+                            x:Name="ToggleSwitch_ShowWarning" 
+                            OnContent="屏蔽游戏内红字" 
+                            OffContent="显示游戏内红字" 
+                            ToolTipService.ToolTip="开启后游戏中将不会显示红字报错，适用于纯享游戏，关闭后将显示红字报错"/>
+                        <ToggleSwitch 
+                            VerticalAlignment="Center" 
+                            Margin="10" 
+                            x:Name="ToggleSwitch_DllMode" 
+                            OnContent="当前dll模式: Play版" 
+                            OffContent="当前dll模式: Dev版" 
+                            Toggled="ToggleSwitch_DllMode_Toggled"
+                            ToolTipService.ToolTip="Dev版用于Mod制作，Play版关闭了Hunting功能，优化了帧率，可以加载DBMT-Encryption插件加密后的Mod"/>
                     </StackPanel>
 
                   
@@ -205,7 +213,12 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,0,0,0" ToolTipService.ToolTip="一般为游戏的启动器或者进程路径，如果是启动器则运行3Dmigoto Loader.exe后将自动调起启动器方便手动启动，如果是游戏进程将自动调起游戏进程实现一键启动，除了米的游戏外直接填进程路径一般需要额外填写对应的启动参数">
                     <TextBlock x:Name="TextBlock_ChooseStarterPath" Text="启动路径:" VerticalAlignment="Center" Margin="10,0,10,0" Foreground="White"/>
                     <TextBox x:Name="StarterPathTextBox" Width="550" />
-                    <Button VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="10,0,0,0">
+                    <Button 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"  
+                        Margin="10,0,0,0"
+                        x:Name="Button_ChooseStarterFile"
+                        Click="Button_ChooseStarterFile_Click">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="OpenFile" />
                             <TextBlock x:Name="TextBlock_ChooseStarterFile" Text="选择文件" VerticalAlignment="Center" />
@@ -224,44 +237,45 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 <!-- 按钮 -->
                 <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="10,10,10,0">
                     <Button 
-                x:Name="Button_InitializePath" 
-                Content="初始化配置" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Right" 
-                Margin="0,0,10,10" 
-                Click="Button_InitializePath_Click"
-                ToolTipService.ToolTip="清除当前填写的所有配置，方便重新填写"/>
+                        x:Name="Button_InitializePath" 
+                        Content="初始化配置" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,0,10,10" 
+                        Click="Button_InitializePath_Click"
+                        ToolTipService.ToolTip="清除当前填写的所有配置，方便重新填写"/>
                     <Button 
-                x:Name="Button_SaveConfig" 
-                Content="保存配置" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Right"  
-                Margin="0,0,10,10" 
-              
-                ToolTipService.ToolTip="保存当前的配置到d3dx.ini"/>
+                        x:Name="Button_SaveConfig" 
+                        Content="保存配置" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"  
+                        Margin="0,0,10,10" 
+                        Click="Button_SaveConfig_Click"
+                        ToolTipService.ToolTip="保存当前的配置到d3dx.ini"/>
                     <Button 
-                x:Name="Button_OpenD3DXINI" 
-                Content="打开d3dx.ini" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Right"  
-                Margin="0,0,10,10" 
-                ToolTipService.ToolTip="打开当前游戏的3Dmigoto目录下的d3dx.ini，方便自己修改配置"/>
+                        x:Name="Button_OpenD3DXINI" 
+                        Content="打开d3dx.ini" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"  
+                        Margin="0,0,10,10" 
+                        Click="Button_OpenD3DXINI_Click"
+                        ToolTipService.ToolTip="打开当前游戏的3Dmigoto目录下的d3dx.ini，方便自己修改配置"/>
                     <Button 
-                x:Name="Button_Open3DmigotoFolder" 
-                Content="打开3Dmigoto文件夹" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Right"  
-                Margin="0,0,10,10" 
-                
-                ToolTipService.ToolTip="打开当前游戏的3Dmigoto文件夹，方便自己配置修改其中内容"/>
+                        x:Name="Button_Open3DmigotoFolder" 
+                        Content="打开3Dmigoto文件夹" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"  
+                        Margin="0,0,10,10" 
+                        Click="Button_Open3DmigotoFolder_Click"
+                        ToolTipService.ToolTip="打开当前游戏的3Dmigoto文件夹，方便自己配置修改其中内容"/>
                     <Button 
-                x:Name="Button_OpenShaderFixesFolder" 
-                Content="打开ShaderFixes文件夹" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Right"  
-                Margin="0,0,10,10" 
-                
-                ToolTipService.ToolTip="打开当前游戏的3Dmigoto文件夹内的ShaderFixes文件夹，方便新增或删减Shader插件"/>
+                        x:Name="Button_OpenShaderFixesFolder" 
+                        Content="打开ShaderFixes文件夹" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"  
+                        Margin="0,0,10,10" 
+                        Click="Button_OpenShaderFixesFolder_Click"
+                        ToolTipService.ToolTip="打开当前游戏的3Dmigoto文件夹内的ShaderFixes文件夹，方便新增或删减Shader插件"/>
                 </StackPanel>
 
             </Grid>

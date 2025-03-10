@@ -79,6 +79,8 @@ namespace MMM_Core
     {
         public string GameName { get; set; } = "GI";
 
+        public string CurrentGameMigotoFolder { get; set; } = "";
+
     }
 
     public static class GlobalConfig
@@ -118,6 +120,25 @@ namespace MMM_Core
         public static string Path_CurrentGameMainConfigJsonFile
         {
             get { return Path.Combine(Path_ConfigsFolder, GlobalConfig.SettingCfg.Value.GameName + "\\MainConfig.json"); }
+        }
+
+        //Path_D3DXINI
+        public static string Path_D3DXINI
+        {
+            get { return Path.Combine(GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder, "d3dx.ini"); }
+        }
+
+        //Path_3DmigotoGameModForkFolder
+
+        public static string Path_3DmigotoGameModForkFolder
+        {
+            get { return Path.Combine(Path_Base, "3Dmigoto-GameMod-Fork\\"); }
+        }
+
+        //Path_LoaderFolder
+        public static string Path_LoaderFolder
+        {
+            get { return GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder; }
         }
 
     }

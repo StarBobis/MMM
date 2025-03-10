@@ -41,8 +41,6 @@ namespace MMM
         {
             this.InitializeComponent();
 
-            this.InitializeComponent();
-
             // 初始化Composition组件
             // 获取Image控件的Visual对象
             imageVisual = ElementCompositionPreview.GetElementVisual(MainWindow.CurrentWindow.mainWindowImageBrush);
@@ -112,6 +110,14 @@ namespace MMM
                 GameName = "绝区零",
                 GameBackGroundImage = new BitmapImage(new Uri(Path.Combine(GlobalConfig.Path_Base, "Assets/GameBackground/绝区零.png")))
             });
+
+            GameIconItemList.Add(new GameIconItem
+            {
+                GameIconImage = "Assets/GameIcon/鸣潮.png",
+                GameName = "鸣潮",
+                GameBackGroundImage = new BitmapImage(new Uri(Path.Combine(GlobalConfig.Path_Base, "Assets/GameBackground/鸣潮.png")))
+            });
+
         }
 
         private void CreateFadeAnimation()
@@ -185,6 +191,7 @@ namespace MMM
                     JObject jObject = MMMJsonUtils.ReadJObjectFromFile(GlobalConfig.Path_CurrentGameMainConfigJsonFile);
                     string MigotoFolder = (string)jObject["MigotoFolder"];
                     MigotoPathTextBox.Text = MigotoFolder;
+                    GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder = MigotoFolder;
 
                     //读取d3dx.ini中的配置
                     ReadPathSettingFromD3dxIni(Path.Combine(MigotoFolder,"d3dx.ini"));
@@ -269,6 +276,8 @@ namespace MMM
                 gameIconItem.MigotoFolder = folderPath;
 
                 gameIconItem.SaveToJson(GlobalConfig.Path_CurrentGameMainConfigJsonFile);
+
+                GlobalConfig.SettingCfg.SaveConfig();
             }
 
 
@@ -289,6 +298,109 @@ namespace MMM
             {
                 ProcessPathTextBox.Text = filepath;
             }
+        }
+
+        private async void Button_ChooseStarterFile_Click(object sender, RoutedEventArgs e)
+        {
+            string filepath = await CommandHelper.ChooseFileAndGetPath(".exe");
+            if (filepath != "")
+            {
+                StarterPathTextBox.Text = filepath;
+            }
+        }
+
+        private async void Button_SaveConfig_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI,"[loader]", "target", ProcessPathTextBox.Text);
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI, "[loader]", "launch", StarterPathTextBox.Text);
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI, "[loader]", "launch_args", TextBox_LaunchArgs.Text);
+
+                if (ToggleSwitch_ShowWarning.IsOn)
+                {
+                    D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI, "[Logging]", "dev", "0");
+                }
+                else
+                {
+                    D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI, "[Logging]", "dev", "1");
+
+                }
+
+
+                await MessageHelper.Show("保存成功");
+
+            }
+            catch (Exception ex)
+            {
+                await MessageHelper.Show("保存失败：" + ex.ToString());
+            }
+        }
+
+        private async void Button_OpenD3DXINI_Click(object sender, RoutedEventArgs e)
+        {
+            await CommandHelper.ShellOpenFile(GlobalConfig.Path_D3DXINI);
+        }
+
+        private async void Button_Open3DmigotoFolder_Click(object sender, RoutedEventArgs e)
+        {
+            await CommandHelper.ShellOpenFolder(GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder);
+
+        }
+
+        private async void Button_OpenShaderFixesFolder_Click(object sender, RoutedEventArgs e)
+        {
+            await CommandHelper.ShellOpenFolder(Path.Combine(GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder, "ShaderFixes\\"));
+        }
+
+        private void ToggleSwitch_DllMode_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (ToggleSwitch_DllMode.IsOn)
+            {
+                //切换到Play版本的d3d11.dll
+                string Path_Dev3DmigotoDll = GlobalConfig.Path_3DmigotoGameModForkFolder + "ReleaseX64Play\\d3d11.dll";
+                string Path_CurrentGame3DmigotoDll = GlobalConfig.Path_LoaderFolder + "d3d11.dll";
+                try
+                {
+                    File.Copy(Path_Dev3DmigotoDll, Path_CurrentGame3DmigotoDll, true);
+                    _ = CommandHelper.ShellOpenFolder(GlobalConfig.Path_LoaderFolder);
+                }
+                catch (Exception ex)
+                {
+                    _ = MessageHelper.Show("切换d3d11.dll失败! 当前游戏使用的d3d11.dll可能已被占用，请先关闭游戏进程和游戏的官方启动器。\n\n" + ex.ToString());
+                }
+            }
+            else
+            {
+                //切换到开发版本的d3d11.dll
+                string Path_Dev3DmigotoDll = GlobalConfig.Path_3DmigotoGameModForkFolder + "ReleaseX64Dev\\d3d11.dll";
+                string Path_CurrentGame3DmigotoDll = GlobalConfig.Path_LoaderFolder + "d3d11.dll";
+                try
+                {
+                    File.Copy(Path_Dev3DmigotoDll, Path_CurrentGame3DmigotoDll, true);
+                    _ = CommandHelper.ShellOpenFolder(GlobalConfig.Path_LoaderFolder);
+                }
+                catch (Exception ex)
+                {
+                    _ = MessageHelper.Show("切换d3d11.dll失败! 当前游戏使用的d3d11.dll可能已被占用，请先关闭游戏进程和游戏的官方启动器。\n\n" + ex.ToString());
+                }
+            }
+        }
+
+        private async void Button_Run3DmigotoLoader_Click(object sender, RoutedEventArgs e)
+        {
+            string MigotoLoaderExePath1 = Path.Combine(GlobalConfig.Path_LoaderFolder, "3Dmigoto Loader.exe");
+            if (File.Exists(MigotoLoaderExePath1))
+            {
+                await CommandHelper.ShellOpenFile(MigotoLoaderExePath1);
+            }
+            else
+            {
+                string MigotoLoaderExePath2 = Path.Combine(GlobalConfig.Path_LoaderFolder, "3DMigoto Loader.exe");
+                await CommandHelper.ShellOpenFile(MigotoLoaderExePath2);
+            }
+
         }
     }
 }

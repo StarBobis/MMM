@@ -141,8 +141,8 @@ TintOpacity="0.0" />
 
                 <TextBlock.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="Yellow" Offset="0.0"/>
-                        <GradientStop Color="Green" Offset="1.0"/>
+                        <GradientStop Color="White" Offset="0.0"/>
+                        <GradientStop Color="White" Offset="1.0"/>
                     </LinearGradientBrush>
                 </TextBlock.Foreground>
             </TextBlock>
