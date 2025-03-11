@@ -15,12 +15,13 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 
 using MMM_Core;
-using MMM.Helper;
 using System.Diagnostics;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Newtonsoft.Json;
+using MMM_Core.Utils;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -47,34 +48,35 @@ namespace MMM
             CategoryItemGridView.ItemsSource = CategoryItemList;
 
             //添加原神角色用于测试，后续需要修改
-            AddNewCategory();
-            AddNewCharacter();
+            ReadCategoryList();
+            CategoryItemGridView.SelectedIndex = 0;
+
+            //AddNewCharacter();
 
             //默认选中第一个角色
-            CharacterItemGridView.SelectedIndex = 0;
+            //CharacterItemGridView.SelectedIndex = 0;
         }
 
-
-        public void AddNewCategory()
+        public void ReadCategoryList()
         {
-            CategoryItemList.Add(new CategoryItem
-            {
-                CategoryImage = "Assets/GI/CategoryImage/角色.png",
-                CategoryNameName = "角色"
-            });
+            CategoryItemList.Clear();
 
-            CategoryItemList.Add(new CategoryItem
-            {
-                CategoryImage = "Assets/GI/CategoryImage/武器.png",
-                CategoryNameName = "武器"
-            });
+            //读取Json文件中的CategoryList列表
+            string CategoryJsonFilePath = GlobalConfig.Path_CurrentGameConfigsFolder + "Category.json";
 
-            CategoryItemList.Add(new CategoryItem
+            if (File.Exists(CategoryJsonFilePath))
             {
-                CategoryImage = "Assets/GI/CategoryImage/添加.png",
-                CategoryNameName = "添加"
-            });
+                string json = File.ReadAllText(CategoryJsonFilePath);
+                List<CategoryItem> ReadedCategoryItems = JsonConvert.DeserializeObject<List<CategoryItem>>(json) ?? new List<CategoryItem>();
+                foreach (CategoryItem categoryItem in ReadedCategoryItems)
+                {
+
+                    Debug.WriteLine("Add : " + categoryItem.CategoryNameName);
+                    CategoryItemList.Add(categoryItem);
+                }
+            }
         }
+       
 
         public void AddNewCharacter()
         {
@@ -105,7 +107,19 @@ namespace MMM
 
         }
 
-
+        public CharacterItem GetCurrentCharacterItem()
+        {
+            if (CharacterItemGridView.SelectedItem != null)
+            {
+                int index = CharacterItemGridView.SelectedIndex;
+                CharacterItem characterItem = CharacterItemList[index];
+                return characterItem;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         private void RefreshModInfoGrid()
         {
@@ -119,7 +133,9 @@ namespace MMM
 
                 string characterName = characterItem.CharacterName;
 
-                string characterModsPath = Path.Combine(GlobalConfig.Path_Base, "Mods\\" + characterName);
+                CategoryItem categoryItem = GetCurrentCategoryItem();
+
+                string characterModsPath = Path.Combine(GlobalConfig.Path_Base, "Mods\\" + GlobalConfig.SettingCfg.Value.GameName + "\\" + categoryItem.CategoryNameName + "\\" + characterName);
                 if (!Directory.Exists(characterModsPath))
                 {
                     Directory.CreateDirectory(characterModsPath);
@@ -127,14 +143,25 @@ namespace MMM
 
                 string[] ModFiles = Directory.GetDirectories(characterModsPath);
 
-
-
                 foreach (string SingleModFolderPath in ModFiles)
                 {
                     ModItem modItem = new ModItem();
                     modItem.ModImage = characterItem.CharacterImage;
                     modItem.ModName = Path.GetFileName(SingleModFolderPath);
                     modItem.ModLoaction = SingleModFolderPath;
+
+                    //对每个Mod都去检测对应加载器中对应的Mod位置是否存在，如果存在则Opacity设为1，否则设为0.5f
+                    string TargetCharacterLocation = Path.Combine(GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder, "Mods\\MMM\\" + categoryItem.CategoryNameName + "\\" + characterItem.CharacterName + "\\");
+                    string TargetModLocation = TargetCharacterLocation + modItem.ModName;
+                    if (Directory.Exists(TargetModLocation))
+                    {
+                        modItem.Color = 1.0f;
+                    }
+                    else
+                    {
+                        modItem.Color = 0.7f;
+                    }
+
                     ModItemList.Add(modItem);
 
                     //获取下面的所有文件，如果有以.png后缀的则作为Image,目前只识别第一个
@@ -164,6 +191,22 @@ namespace MMM
             await CommandHelper.ShellOpenFolder(GlobalConfig.Path_ModsFolder);
         }
 
+        public CategoryItem GetCurrentCategoryItem()
+        {
+            if (CategoryItemGridView.SelectedItem != null)
+            {
+                int index = CategoryItemGridView.SelectedIndex;
+
+                CategoryItem categoryItem = CategoryItemList[index];
+                return categoryItem;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
         private async void Menu_OpenCharacterFolder_Click(object sender, RoutedEventArgs e)
         {
             //选中角色改变后，执行这里的方法。
@@ -174,7 +217,9 @@ namespace MMM
 
                 string characterName = characterItem.CharacterName;
 
-                string characterModsPath = Path.Combine(GlobalConfig.Path_Base, "Mods\\" + characterName);
+                CategoryItem categoryItem = GetCurrentCategoryItem();
+
+                string characterModsPath = Path.Combine(GlobalConfig.Path_Base, "Mods\\" + GlobalConfig.SettingCfg.Value.GameName + "\\" + categoryItem.CategoryNameName + "\\" + characterName);
 
                 await CommandHelper.ShellOpenFolder(characterModsPath);
             }
@@ -188,7 +233,6 @@ namespace MMM
                 ModItem modItem = ModItemList[index];
                 //Debug.WriteLine(modItem.ModLoaction);
                 await CommandHelper.ShellOpenFolder(modItem.ModLoaction);
-
             }
         }
 
@@ -196,6 +240,7 @@ namespace MMM
         {
             e.AcceptedOperation = DataPackageOperation.Copy;
         }
+
         private T FindAncestor<T>(DependencyObject element) where T : DependencyObject
         {
             while (element != null)
@@ -268,9 +313,12 @@ namespace MMM
                         if (IsSupportedImageFormat(filePath))
                         {
                             string extension = Path.GetExtension(filePath);
-                            GC.Collect();
-                            File.Copy(filePath,Path.Combine(ModLocation, "Preview" + extension),true);
-                            GC.Collect();
+                            string TargetPictureLocation = Path.Combine(ModLocation, "Preview" + extension);
+                            if (File.Exists(TargetPictureLocation))
+                            {
+                                File.Delete(TargetPictureLocation);
+                            }
+                            File.Copy(filePath, TargetPictureLocation,true);
                         }
                     }
                 }
@@ -279,19 +327,27 @@ namespace MMM
             var image = grid.FindVisualChildren<Image>().FirstOrDefault();
             if (image != null)
             {
-                // 强制刷新 Image 控件
-                image.Source = null;
-                GC.Collect();
+                ModItem modItem1 = (ModItem)image.DataContext;
+                Debug.WriteLine("替换图片源为:");
+                image.Visibility = Visibility.Collapsed;
+                Debug.WriteLine(modItem1.ModImage);
+                // 创建新的 BitmapImage 并重新加载图片
+                using (var stream = new FileStream(modItem1.ModImage, FileMode.Open, FileAccess.Read))
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.SetSource(stream.AsRandomAccessStream());
+                    image.Source = bitmap;
+                }
 
-                string uniqueKey = Guid.NewGuid().ToString(); // 使用 GUID 作为唯一键
-                //image.Source = new BitmapImage(new Uri($"{filePath}?t={uniqueKey}"));
+                image.Visibility = Visibility.Visible;
 
-                image.Source = new BitmapImage(new Uri(image.DataContext is ModItem modItem1 ? modItem1.ModImage : ""));
             }
             else
             {
                 Debug.WriteLine("未找到控件");
             }
+
+            RefreshModInfoGrid();
 
         }
 
@@ -315,7 +371,101 @@ namespace MMM
             await CommandHelper.ShellOpenFolder(GlobalConfig.Path_ConfigsFolder);
         }
 
+        public void ReadCharacterList(string CategoryName = "")
+        {
+            CharacterItemList.Clear();
 
+            //读取Json文件中的CategoryList列表
+            string CurrentGameConfigCategoryFolder = GlobalConfig.Path_CurrentGameConfigsFolder + "Category\\";
+            if (!Directory.Exists(CurrentGameConfigCategoryFolder))
+            {
+                Directory.CreateDirectory(CurrentGameConfigCategoryFolder);
+            }
 
+            string CharacterJsonFilePath = CurrentGameConfigCategoryFolder + CategoryName + ".json";
+
+            if (File.Exists(CharacterJsonFilePath))
+            {
+                int totalModNumber = 0;
+
+                string json = File.ReadAllText(CharacterJsonFilePath);
+                List<CharacterItem> ReadedCharacterItems = JsonConvert.DeserializeObject<List<CharacterItem>>(json) ?? new List<CharacterItem>();
+                foreach (CharacterItem characterItem in ReadedCharacterItems)
+                {
+                    string characterModsPath = Path.Combine(GlobalConfig.Path_Base, "Mods\\" +GlobalConfig.SettingCfg.Value.GameName + "\\" + CategoryName + "\\" + characterItem.CharacterName);
+                    if (!Directory.Exists(characterModsPath))
+                    {
+                        Directory.CreateDirectory(characterModsPath);
+                    }
+
+                    string[] modFiles = Directory.GetDirectories(characterModsPath);
+                    characterItem.ModNumber = modFiles.Length.ToString();
+
+                    totalModNumber = totalModNumber + modFiles.Length;
+
+                    if (CategoryName == characterItem.Category)
+                    {
+                        CharacterItemList.Add(characterItem);
+                    }
+                }
+
+                TextBlockModNumber.Text = "Mod总数量: " + totalModNumber.ToString();
+            }
+        }
+
+        private void CategoryItemGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CategoryItemGridView.SelectedItem != null)
+            {
+                int index = CategoryItemGridView.SelectedIndex;
+
+                CategoryItem categoryItem = CategoryItemList[index];
+                ReadCharacterList(categoryItem.CategoryNameName);
+
+                CharacterItemGridView.SelectedIndex = 0;
+            }
+        }
+
+       
+
+        private void ModShowGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            if (ModItemGridView.SelectedItem != null)
+            {
+                int index = ModItemGridView.SelectedIndex;
+                ModItem modItem = ModItemList[index];
+                //modItem.Color = 1.0f;
+                ModItemList[index] = modItem;
+
+                string ModLocation = modItem.ModLoaction;
+
+                CategoryItem currentCategoryItem = GetCurrentCategoryItem();
+                CharacterItem currentCharacterItem = GetCurrentCharacterItem();
+
+                string TargetCharacterLocation = Path.Combine(GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder, "Mods\\MMM\\" + currentCategoryItem.CategoryNameName + "\\" + currentCharacterItem.CharacterName + "\\");
+                if (!Directory.Exists(TargetCharacterLocation))
+                {
+                    Directory.CreateDirectory(TargetCharacterLocation);
+                }
+                else
+                {
+                    Directory.Delete(TargetCharacterLocation, true);
+                    Directory.CreateDirectory(TargetCharacterLocation);
+                }
+
+                string TargetModLocation = Path.Combine(TargetCharacterLocation, modItem.ModName);
+
+                if (!Directory.Exists(TargetModLocation))
+                {
+                    Directory.CreateDirectory(TargetModLocation);
+                }
+
+                MMMFileUtils.CopyDirectory(ModLocation, TargetModLocation, true);
+
+                RefreshModInfoGrid();
+
+                _ = CommandHelper.ShellOpenFolder(TargetModLocation);
+            }
+        }
     }
 }

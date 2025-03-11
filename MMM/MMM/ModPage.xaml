@@ -63,10 +63,10 @@
                 Margin="20,10"
                 Width="Auto" 
                 HorizontalAlignment="Left"  
-                BorderThickness="1" CornerRadius="5" BorderBrush="White">
+                BorderThickness="0" CornerRadius="5" BorderBrush="White">
                 
                 <GridView
-               
+                SelectionChanged="CategoryItemGridView_SelectionChanged"
                 x:Name="CategoryItemGridView"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 MaxHeight="300" MaxWidth="500"
@@ -120,6 +120,7 @@ The following sets the maximum # of items to show before wrapping.-->
                     </GridView.ItemsPanel>
                 </GridView>
             </Border>
+            
             <!--用于角色展示的GridView-->
             <Border   
                 Grid.Row="2"
@@ -128,7 +129,7 @@ The following sets the maximum # of items to show before wrapping.-->
                 Width="Auto" 
                 Height="500"
                 HorizontalAlignment="Left"  
-                BorderThickness="1" CornerRadius="5" BorderBrush="White">
+                BorderThickness="0" CornerRadius="5" BorderBrush="White">
                 <!-- The GridView used for this example is shown below. Setter properties are used to customize
 some parts of the GridViewItems (i.e. the margins). -->
                 <GridView
@@ -200,15 +201,16 @@ some parts of the GridViewItems (i.e. the margins). -->
                 </GridView>
             </Border>
 
+            <!--Mod面板-->
             <Border   
                 Grid.Row="1"
                 Grid.Column="1"
                 Grid.RowSpan="2"
                 Margin="30,30"
                 HorizontalAlignment="Left"  
-                BorderThickness="1" 
+                BorderThickness="0" 
                 CornerRadius="5" 
-                Width="Auto"
+                Width="640"
                 Height="620"
                 BorderBrush="White">
                 <!-- The GridView used for this example is shown below. Setter properties are used to customize
@@ -220,12 +222,10 @@ some parts of the GridViewItems (i.e. the margins). -->
                     <GridView.ItemTemplate>
                         <DataTemplate x:Name="ModItemGridTemplate" x:DataType="mmm_core:ModItem" >
                             <GridViewItem>
-                                <Grid x:Name="ModShowGrid" Width="200" Height="200" AllowDrop="True" DragOver="ModShowGrid_DragOver" Drop="ModShowGrid_Drop">
+                                <Grid x:Name="ModShowGrid" Width="200" Height="200" AllowDrop="True" DragOver="ModShowGrid_DragOver" Drop="ModShowGrid_Drop" DoubleTapped="ModShowGrid_DoubleTapped">
                                     <Grid.ContextFlyout>
                                         <MenuFlyout >
                                             <MenuFlyoutItem x:Name="Menu_ModLocationFolder" Text="打开该Mod所在文件夹" Click="Menu_ModLocationFolder_Click" />
-                                            <!--<MenuFlyoutItem x:Name="Menu_UseThisMod" Text="启用该Mod" />
-                   <MenuFlyoutItem x:Name="Menu_ModDetailInfo" Text="查看Mod详细信息" />-->
                                         </MenuFlyout>
                                     </Grid.ContextFlyout>
 
@@ -236,7 +236,7 @@ some parts of the GridViewItems (i.e. the margins). -->
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image  Grid.Row="0" Source="{x:Bind ModImage}" Stretch="UniformToFill" Width="200" Height="180"/>
+                                    <Image  Grid.Row="0" Source="{x:Bind ModImage}" Stretch="UniformToFill" Width="200" Height="180" Opacity="{x:Bind Color}"/>
 
                                     <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" >
                                         <StackPanel.Background>
@@ -247,12 +247,13 @@ some parts of the GridViewItems (i.e. the margins). -->
                                             TintOpacity="0.0" />
                                         </StackPanel.Background>
 
-                                        <TextBlock HorizontalAlignment="Center" Text="{x:Bind ModName}" FontWeight="Bold"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{x:Bind ModName}" FontWeight="Bold" />
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                             <TextBlock 
                                            Text="作者: " 
                                            Style="{ThemeResource CaptionTextBlockStyle}" 
                                            Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                            
                                             <TextBlock 
                                            Text="{x:Bind ModAuthor}" 
                                            Style="{ThemeResource CaptionTextBlockStyle}" 

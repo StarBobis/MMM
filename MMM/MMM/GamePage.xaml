@@ -143,18 +143,26 @@ The following sets the maximum # of items to show before wrapping.-->
         <!--一键启动按钮-->
         <Border Grid.RowSpan="2" Grid.Column="2"  Width="Auto" 
 HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40" 
- BorderThickness="1" CornerRadius="5" BorderBrush="White">
+ BorderThickness="2" CornerRadius="15" BorderBrush="White">
             <Button 
-                Style="{StaticResource AccentButtonStyle}" 
                 ToolTipService.ToolTip="一键启动3Dmigoto Loader.exe并由3Dmigoto Loader.exe启动[启动路径]中的内容随后注入3Dmigoto到[进程路径]中的内容" 
                 x:Name="Button_Run3DmigotoLoader" 
                 FontSize="25" 
-    
+                
                 Width="200"
-                Content="开始游戏" 
+                Content="开 始 游 戏" 
+                Foreground="White"
+                FontWeight="Bold"
                 Click="Button_Run3DmigotoLoader_Click"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Right">
+
+                <Button.Background>
+                    <AcrylicBrush
+        TintColor="Black"
+        TintOpacity="0.5"
+        FallbackColor="Black"/>
+                </Button.Background>
             </Button>
         </Border>
         

@@ -52,12 +52,9 @@ namespace MMM
             //设置图标
             this.AppWindow.SetIcon("Assets/Miao.ico");
 
-            //默认进入设置界面 8
+            //默认进入界面 
             if (nvSample.MenuItems.Count > 0)
             {
-                //nvSample.SelectedItem = nvSample.FooterMenuItems;
-                contentFrame.Navigate(typeof(SettingsPage));
-
                 nvSample.SelectedItem = nvSample.MenuItems[0];
                 contentFrame.Navigate(typeof(GamePage));
 

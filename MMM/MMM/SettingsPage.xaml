@@ -10,26 +10,297 @@
     xmlns:mmm_core="using:MMM_Core"
     Background="Transparent">
 
-   
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-       
 
 
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto"  Background="#80000000">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--用于显示分类Category的GridView-->
+            <Border   
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="20,10"
+                Width="Auto"
+                HorizontalAlignment="Center"  
+                BorderThickness="1" CornerRadius="5" BorderBrush="White">
+                <Border.Background>
+                    <AcrylicBrush
+                        TintColor="Black"
+                        TintOpacity="0.5"
+                        FallbackColor="Black"/>
+                </Border.Background>
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GridView 
+                        Grid.Column="0" Grid.Row="0"
+                        x:Name="CategoryItemGridView"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        HorizontalAlignment="Center"
+                        SelectionChanged="CategoryItemGridView_SelectionChanged"
+                        MaxHeight="300">
+
+                        <GridView.ItemTemplate>
+                            <DataTemplate  x:DataType="mmm_core:CategoryItem" >
+                                <GridViewItem>
+
+                                    <Grid x:Name="ModShowGrid" Width="80" Height="80" AllowDrop="True" >
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image  Grid.Row="0" Source="{x:Bind CategoryImage}" Stretch="Fill" Width="80" Height="80"/>
+
+                                        <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Bottom" Height="20" >
+                                            <StackPanel.Background>
+                                                <AcrylicBrush 
+                                              FallbackColor="#EE222222"
+                                              TintColor="#222222"
+                                              TintLuminosityOpacity="0.7"
+                                              TintOpacity="0.0" />
+                                            </StackPanel.Background>
+                                            <TextBlock HorizontalAlignment="Center" Margin="1" VerticalAlignment="Bottom" Text="{x:Bind CategoryNameName}" FontSize="11" FontWeight="Bold"/>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </GridViewItem>
+
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                                <Setter Property="Margin" Value="5,5, 5, 5"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
+The following sets the maximum # of items to show before wrapping.-->
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid 
+                       MaximumRowsOrColumns="10"
+                       Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center">
+                        <TextBlock 
+                            x:Name="TextBlock_CategoryName"
+                            Margin="5,5,5,5" 
+                            VerticalAlignment="Center" 
+                            Text="分类名称:"></TextBlock>
+                        <TextBox 
+                            x:Name="TextBox_CategoryName"
+                            Margin="5,5,5,5" 
+                            Width="200"></TextBox>
+                        <TextBlock 
+                            x:Name="TextBlock_CategoryImage"
+                            Margin="5,5,5,5" 
+                            VerticalAlignment="Center" 
+                            Text="分类图片路径:"></TextBlock>
+                        <TextBox 
+                            x:Name="TextBox_CategoryImage"
+                            Margin="5,5,5,5" 
+                            Width="400"></TextBox>
+                        <Button 
+                            Click="Button_ChooseCategoryImage_Click"
+                            x:Name="Button_ChooseCategoryImage"
+                            Margin="5,5,5,5" 
+                            Content="选择图片"></Button>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center">
+                        <Button 
+                            Click="Button_AddNewCategory_Click"
+                            x:Name="Button_AddNewCategory"
+                            Margin="5,5,5,5" 
+                            Content="新增分类"></Button>
+                        <Button 
+                            Click="Button_ModifySelectedCategory_Click"
+                            x:Name="Button_ModifySelectedCategory"
+                            Margin="5,5,5,5" 
+                            Content="修改选中的分类项"></Button>
+                        <Button 
+                            Click="Button_DeleteSelectedCategory_Click"
+                            x:Name="Button_DeleteSelectedCategory"
+                            Margin="5,5,5,5" 
+                            Content="删除选中的分类项"></Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
 
+            <!--用于显示分类Category的GridView-->
+            <Border   
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20,10"
+                Width="Auto"
+                HorizontalAlignment="Center"  
+                BorderThickness="1" CornerRadius="5" BorderBrush="White">
+                <Border.Background>
+                    <AcrylicBrush
+                        TintColor="Black"
+                        TintOpacity="0.5"
+                        FallbackColor="Black"/>
+                </Border.Background>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GridView
+                        x:Name="CharacterItemGridView"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        MaxHeight="300" Grid.Row="0" Grid.Column="0">
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:Name="CharacterGridTemplate" x:DataType="mmm_core:CharacterItem">
+                                <GridViewItem>
+                                    <Grid Width="110" Height="148">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.Row="0" Source="{x:Bind BackgroundImage}" Stretch="UniformToFill" Width="110" Height="110" Opacity="0.9"/>
+                                        <Image Grid.Row="0" Source="{x:Bind CharacterImage}" Stretch="UniformToFill" Width="110" Height="110"/>
+
+                                        <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" >
+                                            <StackPanel.Background>
+                                                <AcrylicBrush 
+                                                     FallbackColor="#EE222222"
+                                                     TintColor="#222222"
+                                                     TintLuminosityOpacity="0.7"
+                                                     TintOpacity="0.0" />
+                                            </StackPanel.Background>
+
+                                            <TextBlock HorizontalAlignment="Center" Text="{x:Bind CharacterName}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </GridViewItem>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                                <Setter Property="Margin" Value="5,5, 5, 5"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
+The following sets the maximum # of items to show before wrapping.-->
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="10" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center">
+                        <TextBlock 
+                             Margin="5,5,5,5" 
+                             VerticalAlignment="Center" 
+                             Text="项目名称:"></TextBlock>
+                        <TextBox 
+                            x:Name="TextBox_CharacterName"
+                             Margin="5,5,5,5" 
+                             Width="200"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center">
+                        <TextBlock 
+                             Margin="5,5,5,5" 
+                             VerticalAlignment="Center" 
+                             Text="背景图片路径:"></TextBlock>
+                        <TextBox 
+                            x:Name="TextBox_CharacterBackgroundImage"
+                             Margin="5,5,5,5" 
+                             Width="400"></TextBox>
+                        <Button 
+                            x:Name="Button_ChooseCharacterBackgroundImage"
+                            Click="Button_ChooseCharacterBackgroundImage_Click"
+                             Margin="5,5,5,5" 
+                             Content="选择图片"></Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center">
+                        <TextBlock 
+                             Margin="5,5,5,5" 
+                             VerticalAlignment="Center" 
+                             Text="主体图片路径:"></TextBlock>
+                        <TextBox 
+                            x:Name="TextBox_CharacterImage"
+                             Margin="5,5,5,5" 
+                             Width="400"></TextBox>
+                        <Button 
+                            x:Name="Button_ChooseCharacterImage"
+                            Click="Button_ChooseCharacterImage_Click"
+                             Margin="5,5,5,5" 
+                             Content="选择图片"></Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center">
+                        <Button 
+                            x:Name="Button_AddNewCharacter"
+                            Click="Button_AddNewCharacter_Click"
+                            Margin="5,5,5,5" 
+                            Content="新增项目"></Button>
+                        <Button 
+                            x:Name="Button_ModifiySelectedCharacter"
+                            Click="Button_ModifiySelectedCharacter_Click"
+                            Margin="5,5,5,5" 
+                            Content="修改选中的项目"></Button>
+                        <Button 
+                            x:Name="Button_DeleteSelectedCharacter"
+                            Click="Button_DeleteSelectedCharacter_Click"
+                            Margin="5,5,5,5" 
+                            Content="删除选中的项目"></Button>
+                    </StackPanel>
+
+
+                </Grid>
+            </Border>
+
+
+        </Grid>
+    </ScrollViewer>
+    
 </Page>

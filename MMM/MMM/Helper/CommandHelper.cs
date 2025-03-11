@@ -9,7 +9,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage;
 using WinRT.Interop;
 
-namespace MMM.Helper
+namespace MMM
 {
     public static class CommandHelper
     {

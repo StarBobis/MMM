@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMM.Helper
+namespace MMM
 {
     public static class MessageHelper
     {

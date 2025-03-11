@@ -24,7 +24,7 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NavigationViewItem_GamePage" Icon="Home" Content="游戏" Tag="GamePage" />
                 <NavigationViewItem x:Name="NavigationViewItem_ModPage" Icon="Edit" Content="Mod" Tag="ModPage" />
-                <NavigationViewItem x:Name="NavigationViewItem_CommunityPage" Icon="OtherUser" Content="社区" Tag="CommunityPage" />
+                <NavigationViewItem x:Name="NavigationViewItem_CommunityPage" Icon="OtherUser" Content="社区" Tag="CommunityPage"  Visibility="Collapsed"/>
             </NavigationView.MenuItems>
 
             <Frame x:Name="contentFrame"/>

@@ -12,7 +12,7 @@ namespace MMM_Core
         public string ModName { get; set; } = "";
         public string ModAuthor { get; set; } = "";
 
-        public bool Enable { get; set; } = false;
+        public float Color { get; set; } = 0.5f;
 
         public string Readme { get; set; } = "";
 

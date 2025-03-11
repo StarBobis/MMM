@@ -52,6 +52,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\原神\" />
+  </ItemGroup>
 	
 	<!--移除额外生成的多语言支持文件夹 -->
 	<Target Name="RemoveFoldersWithMuiFiles" Condition="'$(WindowsPackageType)' == 'None'" AfterTargets="Build">
