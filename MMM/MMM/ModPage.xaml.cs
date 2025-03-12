@@ -168,14 +168,22 @@ namespace MMM
 
                     //对每个Mod都去检测对应加载器中对应的Mod位置是否存在，如果存在则Opacity设为1，否则设为0.5f
                     string TargetCharacterLocation = Path.Combine(GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder, "Mods\\MMM\\" + categoryItem.CategoryNameName + "\\" + characterItem.CharacterName + "\\");
-                    string TargetModLocation = TargetCharacterLocation + modItem.ModName;
-                    if (Directory.Exists(TargetModLocation))
+                    if (Directory.Exists(TargetCharacterLocation))
                     {
-                        modItem.Color = 1.0f;
+                        string[] modfiles = Directory.GetFiles(TargetCharacterLocation);
+                        if (modfiles.Length != 0)
+                        {
+                            modItem.Color = 1.0f;
+
+                        }
+                        else
+                        {
+                            modItem.Color = 0.5f;
+                        }
                     }
                     else
                     {
-                        modItem.Color = 0.7f;
+                        modItem.Color = 0.5f;
                     }
 
 
@@ -486,18 +494,12 @@ namespace MMM
                 Directory.CreateDirectory(TargetCharacterLocation);
             }
 
-            string TargetModLocation = Path.Combine(TargetCharacterLocation, modItem.ModName);
-            if (!Directory.Exists(TargetModLocation))
-            {
-                Directory.CreateDirectory(TargetModLocation);
-            }
-
-            CommandHelper.UnzipFileToFolder(modItem.ModCompressedFilePath, TargetModLocation);
+            CommandHelper.UnzipFileToFolder(modItem.ModCompressedFilePath, TargetCharacterLocation);
             //MMMFileUtils.CopyDirectory(ModLocation, TargetModLocation, true);
 
             RefreshModInfoGrid();
 
-            _ = CommandHelper.ShellOpenFolder(TargetModLocation);
+            _ = CommandHelper.ShellOpenFolder(TargetCharacterLocation);
         }
 
         /// <summary>
@@ -578,7 +580,6 @@ namespace MMM
                         {
                             File.Copy(filePath, Path.Combine(characterModsPath, FileName));
                             ReadCharacterList(categoryItem.CategoryNameName);
-
                             CharacterItemGridView.SelectedIndex = CharacterIndex;
 
                         }
@@ -589,6 +590,49 @@ namespace MMM
                     }
                 }
             }
+        }
+
+        private void Menu_CloseMod_Click(object sender, RoutedEventArgs e)
+        {
+            ModItem modItem = GetCurrentSelectedModItem();
+            CategoryItem categoryItem = GetCurrentSelectedCategoryItem();
+            CharacterItem characterItem = GetCurrentSelectedCharacterItem();
+
+            string TargetCharacterLocation = Path.Combine(GlobalConfig.SettingCfg.Value.CurrentGameMigotoFolder, "Mods\\MMM\\" + categoryItem.CategoryNameName + "\\" + characterItem.CharacterName + "\\");
+
+            //确保目标角色目录存在，并且双击时删除目标角色目录，再重新创建
+            if (Directory.Exists(TargetCharacterLocation))
+            {
+                Directory.Delete(TargetCharacterLocation, true);
+                _ = MessageHelper.Show("已关闭此Mod");
+                Directory.CreateDirectory(TargetCharacterLocation);
+            }
+            else
+            {
+                _ = MessageHelper.Show("此Mod尚未启用，无需关闭");
+            }
+
+        }
+
+        private void Menu_DeleteMod_Click(object sender, RoutedEventArgs e)
+        {
+            ModItem modItem = GetCurrentSelectedModItem();
+
+            //复制到当前存储库中
+            if (File.Exists(modItem.ModCompressedFilePath))
+            {
+                File.Delete(modItem.ModCompressedFilePath);
+
+                int CharacterIndex = CharacterItemGridView.SelectedIndex;
+
+
+                CategoryItem categoryItem = GetCurrentSelectedCategoryItem();
+                ReadCharacterList(categoryItem.CategoryNameName);
+                CharacterItemGridView.SelectedIndex = CharacterIndex;
+                _ = MessageHelper.Show("已删除此Mod的存储文件和缓存文件");
+
+            }
+
         }
     }
 }

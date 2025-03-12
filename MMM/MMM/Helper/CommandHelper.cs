@@ -170,7 +170,7 @@ namespace MMM
 
         public static void UnzipFileToFolder(string SourceCompressedFilePath, string TargetFolder)
         {
-            string arugmentsstr = " x " + SourceCompressedFilePath  + " -o\"" + TargetFolder + "\" -aoa ";
+            string arugmentsstr = " x \"" + SourceCompressedFilePath  + "\" -o\"" + TargetFolder + "\" -aoa ";
             RunExeFile(GlobalConfig.Path_7ZipExe, arugmentsstr);
         }
 

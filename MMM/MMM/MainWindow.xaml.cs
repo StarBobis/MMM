@@ -43,7 +43,7 @@ namespace MMM
             this.ExtendsContentIntoTitleBar = true;
 
             //设置标题
-            this.Title = "喵喵喵Mod管理器 V1.0.0.3";
+            this.Title = "喵喵喵Mod管理器 V1.0.0.4";
 
             //设置窗口大小
             //1111 814   

@@ -230,6 +230,8 @@ some parts of the GridViewItems (i.e. the margins). -->
                                     <Grid.ContextFlyout>
                                         <MenuFlyout >
                                             <MenuFlyoutItem x:Name="Menu_ModLocationFolder" Text="打开该Mod所在文件夹" Click="Menu_ModLocationFolder_Click" />
+                                            <MenuFlyoutItem x:Name="Menu_CloseMod" Text="关闭该Mod"  Click="Menu_CloseMod_Click"/>
+                                            <MenuFlyoutItem x:Name="Menu_DeleteMod" Text="删除该Mod的存储与缓存文件" Click="Menu_DeleteMod_Click"/>
                                         </MenuFlyout>
                                     </Grid.ContextFlyout>
 
