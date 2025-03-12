@@ -1,0 +1,37 @@
+[
+  {
+    "CharacterName": "黯蔷薇",
+    "Category": "丽塔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\黯蔷薇_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\黯蔷薇_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "猎袭装·影铁",
+    "Category": "丽塔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\猎袭装·影铁_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\猎袭装·影铁_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "失落迷迭",
+    "Category": "丽塔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\失落迷迭_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\失落迷迭_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "苍骑士·月魂",
+    "Category": "丽塔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\苍骑士·月魂_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\苍骑士·月魂_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "缭乱星棘",
+    "Category": "丽塔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\缭乱星棘_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\缭乱星棘_Background.png",
+    "ModNumber": ""
+  }
+]

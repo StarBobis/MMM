@@ -1,0 +1,58 @@
+[
+  {
+    "CharacterName": "领域装·白练",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\领域装·白练_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\领域装·白练_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "女武神·游侠",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\女武神·游侠_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\女武神·游侠_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "圣女祈祷",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\圣女祈祷_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\圣女祈祷_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "白骑士·月光",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\白骑士·月光_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\白骑士·月光_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "空之律者",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\空之律者_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\空之律者_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "天穹游侠",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\天穹游侠_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\天穹游侠_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "薪炎之律者",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\薪炎之律者_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\薪炎之律者_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "终焉之律者",
+    "Category": "琪亚娜",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\终焉之律者_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\终焉之律者_Background.png",
+    "ModNumber": ""
+  }
+]

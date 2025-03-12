@@ -1,0 +1,23 @@
+[
+  {
+    "CharacterName": "享乐狂宴·邀影",
+    "Category": "命运之轮",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\享乐狂宴·邀影_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\享乐狂宴·邀影_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "破弃孤光·逐影",
+    "Category": "命运之轮",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\破弃孤光·逐影_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\破弃孤光·逐影_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "瞒天乐游·曙影",
+    "Category": "命运之轮",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\瞒天乐游·曙影_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\瞒天乐游·曙影_Background.png",
+    "ModNumber": ""
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "CharacterName": "女武神·荣光",
+    "Category": "幽兰黛尔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\女武神·荣光_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\女武神·荣光_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "辉骑士·月魄",
+    "Category": "幽兰黛尔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\辉骑士·月魄_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\辉骑士·月魄_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "不灭星锚",
+    "Category": "幽兰黛尔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\不灭星锚_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\不灭星锚_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "天元骑英",
+    "Category": "幽兰黛尔",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\天元骑英_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\天元骑英_Background.png",
+    "ModNumber": ""
+  }
+]

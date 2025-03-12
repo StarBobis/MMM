@@ -20,7 +20,7 @@ namespace MMM_Core
 
         public bool Deprecated { get; set; } = false;
 
-        public string ModLoaction { get; set; } = "";
+        public string ModCompressedFilePath { get; set; } = "";
 
     }
 }

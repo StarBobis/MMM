@@ -1,0 +1,23 @@
+[
+  {
+    "CharacterName": "圣仪装·今样",
+    "Category": "卡莲",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\圣仪装·今样_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\圣仪装·今样_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "原罪猎人",
+    "Category": "卡莲",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\原罪猎人_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\原罪猎人_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "第六夜想曲",
+    "Category": "卡莲",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\第六夜想曲_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\第六夜想曲_Background.png",
+    "ModNumber": ""
+  }
+]

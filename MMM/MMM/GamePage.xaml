@@ -44,7 +44,8 @@ some parts of the GridViewItems (i.e. the margins). -->
 
                 <GridView.ItemTemplate>
                     <DataTemplate x:Name="GameIconItemGridTemplate" x:DataType="mmm_core:GameIconItem" >
-                        <GridViewItem PointerEntered="GridViewItem_PointerEntered">
+                        <!--<GridViewItem PointerEntered="GridViewItem_PointerEntered">-->
+                        <GridViewItem>
 
                             <Grid x:Name="ModShowGrid" Width="80" Height="80" AllowDrop="True" >
 

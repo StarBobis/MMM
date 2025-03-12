@@ -1,0 +1,23 @@
+[
+  {
+    "CharacterName": "樱桃炸弹",
+    "Category": "阿琳姐妹",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\樱桃炸弹_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\樱桃炸弹_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "蓝莓特攻",
+    "Category": "阿琳姐妹",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\蓝莓特攻_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\蓝莓特攻_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "狂热蓝调Δ",
+    "Category": "阿琳姐妹",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\狂热蓝调Δ_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\狂热蓝调Δ_Background.png",
+    "ModNumber": ""
+  }
+]

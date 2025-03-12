@@ -256,19 +256,19 @@ namespace MMM
 
 
 
-        private void GridViewItem_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            if (sender is GridViewItem gridViewItem)
-            {
-                // 获取当前鼠标悬停的项的索引
-                var index = GameIconGridView.IndexFromContainer(gridViewItem);
-                if (index != -1)
-                {
-                    // 设置该项为选中状态
-                    GameIconGridView.SelectedIndex = index;
-                }
-            }
-        }
+        //private void GridViewItem_PointerEntered(object sender, PointerRoutedEventArgs e)
+        //{
+        //    if (sender is GridViewItem gridViewItem)
+        //    {
+        //        // 获取当前鼠标悬停的项的索引
+        //        var index = GameIconGridView.IndexFromContainer(gridViewItem);
+        //        if (index != -1)
+        //        {
+        //            // 设置该项为选中状态
+        //            GameIconGridView.SelectedIndex = index;
+        //        }
+        //    }
+        //}
 
 
         public void ReadPathSettingFromD3dxIni(string d3dxini_path)
@@ -434,16 +434,13 @@ namespace MMM
         private async void Button_Run3DmigotoLoader_Click(object sender, RoutedEventArgs e)
         {
             string MigotoLoaderExePath1 = Path.Combine(GlobalConfig.Path_LoaderFolder, "3Dmigoto Loader.exe");
-            if (File.Exists(MigotoLoaderExePath1))
+            if (!File.Exists(MigotoLoaderExePath1))
             {
-                await CommandHelper.ShellOpenFile(MigotoLoaderExePath1);
-            }
-            else
-            {
-                string MigotoLoaderExePath2 = Path.Combine(GlobalConfig.Path_LoaderFolder, "3DMigoto Loader.exe");
-                await CommandHelper.ShellOpenFile(MigotoLoaderExePath2);
+                string OriginalMigotoLoaderExePath = Path.Combine(GlobalConfig.Path_Base, "3Dmigoto-GameMod-Fork\\3Dmigoto Loader.exe");
+                File.Copy(OriginalMigotoLoaderExePath, MigotoLoaderExePath1,true);
             }
 
+            await CommandHelper.ShellOpenFile(MigotoLoaderExePath1);
         }
 
         private void GridViewItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)

@@ -1,0 +1,30 @@
+[
+  {
+    "CharacterName": "幻海梦蝶",
+    "Category": "希儿",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\幻海梦蝶_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\幻海梦蝶_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "彼岸双生",
+    "Category": "希儿",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\彼岸双生_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\彼岸双生_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "魇夜星渊",
+    "Category": "希儿",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\魇夜星渊_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\魇夜星渊_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "死生之律者",
+    "Category": "希儿",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\死生之律者_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\死生之律者_Background.png",
+    "ModNumber": ""
+  }
+]

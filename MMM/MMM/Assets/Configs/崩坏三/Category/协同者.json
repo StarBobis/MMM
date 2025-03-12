@@ -1,0 +1,37 @@
+[
+  {
+    "CharacterName": "松雀",
+    "Category": "协同者",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\松雀_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\松雀_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "寻梦者·女",
+    "Category": "协同者",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\寻梦者·女_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\寻梦者·女_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "寻梦者·男",
+    "Category": "协同者",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\寻梦者·男_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\寻梦者·男_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "瑟拉珮姆",
+    "Category": "协同者",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\瑟拉珮姆_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\瑟拉珮姆_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "德丽莎·阿波卡利斯",
+    "Category": "协同者",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\德丽莎·阿波卡利斯_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\德丽莎·阿波卡利斯_Background.png",
+    "ModNumber": ""
+  }
+]

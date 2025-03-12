@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using WinRT.Interop;
+using MMM_Core;
+using System.Threading.Channels;
 
 namespace MMM
 {
@@ -163,6 +165,52 @@ namespace MMM
             }
             return "";
 
+        }
+
+
+        public static void UnzipFileToFolder(string SourceCompressedFilePath, string TargetFolder)
+        {
+            string arugmentsstr = " x " + SourceCompressedFilePath  + " -o\"" + TargetFolder + "\" -aoa ";
+            RunExeFile(GlobalConfig.Path_7ZipExe, arugmentsstr);
+        }
+
+        public static void RunExeFile(string ExeFilePath, string ArgumentsString)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = ExeFilePath;
+            process.StartInfo.Arguments = ArgumentsString;
+            process.StartInfo.UseShellExecute = false;  // 不使用操作系统的shell启动程序
+            process.StartInfo.RedirectStandardOutput = true;  // 重定向标准输出
+            process.StartInfo.RedirectStandardError = true;   // 重定向标准错误输出
+            process.StartInfo.CreateNoWindow = true;  // 不创建新窗口
+
+            // 使用异步读取输出和错误流，避免死锁
+            process.OutputDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    Debug.WriteLine($"Standard Output: {e.Data}");
+                }
+            };
+
+            process.ErrorDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    Debug.WriteLine($"Standard Error: {e.Data}");
+                }
+            };
+
+            process.Start();
+
+            // 开始异步读取输出和错误流
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            process.WaitForExit();
+
+            // 可选：在调试窗口中输出退出代码
+            Debug.WriteLine($"Process exited with code: {process.ExitCode}");
         }
 
     }

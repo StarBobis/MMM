@@ -123,6 +123,16 @@ namespace MMM_Core
             get { return Path.Combine(Path_Base, "Mods\\"); }
         }
 
+        public static string Path_PluginsFolder
+        {
+            get { return Path.Combine(Path_Base, "Plugins\\"); }
+        }
+
+        public static string Path_7ZipExe
+        {
+            get { return Path.Combine(Path_PluginsFolder, "7-Zip\\7z.exe"); }
+        }
+
         public static string Path_CurrentGameMainConfigJsonFile
         {
             get { return Path.Combine(Path_ConfigsFolder, GlobalConfig.SettingCfg.Value.GameName + "\\MainConfig.json"); }

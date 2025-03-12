@@ -69,7 +69,7 @@
                 SelectionChanged="CategoryItemGridView_SelectionChanged"
                 x:Name="CategoryItemGridView"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                MaxHeight="300" MaxWidth="500"
+                MaxHeight="270" MaxWidth="500"
                 >
 
                     <GridView.ItemTemplate>
@@ -106,7 +106,7 @@
 
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
-                            <Setter Property="Margin" Value="5,5, 5, 5"/>
+                            <Setter Property="Margin" Value="2,2, 2, 2"/>
                         </Style>
                     </GridView.ItemContainerStyle>
                     <!-- An extra property also needs to be added to the GridView's ItemsWrapGrid.
@@ -127,7 +127,7 @@ The following sets the maximum # of items to show before wrapping.-->
                 Grid.Column="0"
                 Margin="20,0"
                 Width="Auto" 
-                Height="500"
+                Height="350"
                 HorizontalAlignment="Left"  
                 BorderThickness="0" CornerRadius="5" BorderBrush="White">
                 <!-- The GridView used for this example is shown below. Setter properties are used to customize
@@ -139,7 +139,7 @@ some parts of the GridViewItems (i.e. the margins). -->
 
                     <GridView.ItemTemplate>
                         <DataTemplate x:Name="CharacterGridTemplate" x:DataType="mmm_core:CharacterItem">
-                            <GridViewItem>
+                            <GridViewItem x:Name="CharacterItem_GridViewItem" RightTapped="CharacterItem_GridViewItem_RightTapped">
                                 <Grid Width="110" Height="148">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -160,7 +160,7 @@ some parts of the GridViewItems (i.e. the margins). -->
                                     <Image Grid.Row="0" Source="{x:Bind BackgroundImage}" Stretch="UniformToFill" Width="110" Height="110" Opacity="0.9"/>
                                     <Image Grid.Row="0" Source="{x:Bind CharacterImage}" Stretch="UniformToFill" Width="110" Height="110"/>
 
-                                    <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" >
+                                    <StackPanel Grid.Row="1" Orientation="Vertical"  Padding="5,1,5,1" ToolTipService.ToolTip="{x:Bind CharacterName}">
                                         <StackPanel.Background>
                                             <AcrylicBrush 
                                              FallbackColor="#EE222222"
@@ -212,6 +212,10 @@ some parts of the GridViewItems (i.e. the margins). -->
                 CornerRadius="5" 
                 Width="640"
                 Height="620"
+                x:Name="ModItemBorder"
+                AllowDrop="True"
+                DragOver="ModItemBorder_DragOver"
+                Drop="ModItemBorder_Drop"
                 BorderBrush="White">
                 <!-- The GridView used for this example is shown below. Setter properties are used to customize
 some parts of the GridViewItems (i.e. the margins). -->
@@ -221,7 +225,7 @@ some parts of the GridViewItems (i.e. the margins). -->
                 >
                     <GridView.ItemTemplate>
                         <DataTemplate x:Name="ModItemGridTemplate" x:DataType="mmm_core:ModItem" >
-                            <GridViewItem>
+                            <GridViewItem x:Name="ModItem_GridViewItem" RightTapped="ModItem_GridViewItem_RightTapped">
                                 <Grid x:Name="ModShowGrid" Width="200" Height="200" AllowDrop="True" DragOver="ModShowGrid_DragOver" Drop="ModShowGrid_Drop" DoubleTapped="ModShowGrid_DoubleTapped">
                                     <Grid.ContextFlyout>
                                         <MenuFlyout >

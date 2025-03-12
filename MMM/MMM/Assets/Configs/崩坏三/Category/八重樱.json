@@ -1,0 +1,30 @@
+[
+  {
+    "CharacterName": "逆神巫女",
+    "Category": "八重樱",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\逆神巫女_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\逆神巫女_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "真炎幸魂",
+    "Category": "八重樱",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\真炎幸魂_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\真炎幸魂_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "御神装·勿忘",
+    "Category": "八重樱",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\御神装·勿忘_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\御神装·勿忘_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "夜隐重霞",
+    "Category": "八重樱",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\夜隐重霞_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\夜隐重霞_Background.png",
+    "ModNumber": ""
+  }
+]

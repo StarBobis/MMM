@@ -48,19 +48,6 @@ namespace MMM
 
         }
 
-        public void AddNewCharacter()
-        {
-            CharacterItemList.Clear();
-
-
-            List<CharacterItem> characterItems = ConfigHelper.GetGICharacterItemList();
-            foreach (CharacterItem characterItem in characterItems)
-            {
-                CharacterItemList.Add(characterItem);
-            }
-
-        }
-
 
         public CategoryItem GetCurrentCategoryItem()
         {
@@ -125,11 +112,6 @@ namespace MMM
                     }
                 }
             }
-            else
-            {
-                //AddNewCharacter();
-                //SaveCharacterList();
-            }
         }
 
         public void SaveCategoryList()
@@ -172,7 +154,6 @@ namespace MMM
             {
                 TextBox_CategoryImage.Text = ImagePath;
             }
-
         }
 
         public CategoryItem CreateNewCategoryItem()
@@ -207,7 +188,7 @@ namespace MMM
             }
             catch (Exception e)
             {
-                _ = MessageHelper.Show("当前已存在名为:" + TextBox_CategoryName.Text + " 的分类");
+                _ = MessageHelper.Show("疑似当前已存在名为:" + TextBox_CategoryName.Text + " 的分类: " + e.ToString());
                 return null;
             }
             
@@ -241,7 +222,12 @@ namespace MMM
             {
                 int index = CategoryItemGridView.SelectedIndex;
 
-                CategoryItemList[index].CategoryImage = "";
+                //在修改时，要把旧的图片删掉才行
+                string oldImagePath = Path.Combine(GlobalConfig.Path_Base, CategoryItemList[index].CategoryImage);
+                if (File.Exists(oldImagePath))
+                {
+                    File.Delete(oldImagePath);
+                }
 
                 CategoryItem categoryItem = CreateNewCategoryItem();
                 if (categoryItem != null)
@@ -250,7 +236,6 @@ namespace MMM
 
                     //修改完记得保存
                     SaveCategoryList();
-
                 }
 
             }
@@ -277,6 +262,7 @@ namespace MMM
                 {
                     File.Delete(CategoryImageCachePath);
                 }
+
                 SaveCategoryList();
 
             }
@@ -356,7 +342,7 @@ namespace MMM
             }
             catch (Exception e)
             {
-                _ = MessageHelper.Show("当前已存在名为:" + TextBox_CharacterName.Text + " 的项目");
+                _ = MessageHelper.Show("疑似当前已存在名为:" + TextBox_CharacterName.Text + " 的项目:" + e.ToString());
                 return null;
             }
 
@@ -389,8 +375,25 @@ namespace MMM
             {
                 int index = CharacterItemGridView.SelectedIndex;
 
+               
+
+
+                string CategoryImageCachePath = Path.Combine(GlobalConfig.Path_Base, CharacterItemList[index].CharacterImage);
+                string CategoryBackgroundImageCachePath = Path.Combine(GlobalConfig.Path_Base, CharacterItemList[index].BackgroundImage);
+                
                 CharacterItemList[index].CharacterImage = "";
                 CharacterItemList[index].BackgroundImage = "";
+
+                //删除缓存图片
+                if (File.Exists(CategoryImageCachePath))
+                {
+                    File.Delete(CategoryImageCachePath);
+                }
+
+                if (File.Exists(CategoryBackgroundImageCachePath))
+                {
+                    File.Delete(CategoryBackgroundImageCachePath);
+                }
 
                 CharacterItem characterItem = CreateNewCharacterItem();
 
@@ -400,7 +403,6 @@ namespace MMM
 
                     //修改完记得保存
                     SaveCharacterList();
-
                 }
 
             }

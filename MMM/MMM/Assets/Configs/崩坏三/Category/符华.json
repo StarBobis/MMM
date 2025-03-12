@@ -1,0 +1,58 @@
+[
+  {
+    "CharacterName": "女武神·迅羽",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\女武神·迅羽_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\女武神·迅羽_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "雾都迅羽",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\雾都迅羽_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\雾都迅羽_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "影骑士·月轮",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\影骑士·月轮_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\影骑士·月轮_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "炽翎",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\炽翎_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\炽翎_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "白夜执事",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\白夜执事_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\白夜执事_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "云墨丹心",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\云墨丹心_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\云墨丹心_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "识之律者",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\识之律者_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\识之律者_Background.png",
+    "ModNumber": ""
+  },
+  {
+    "CharacterName": "浮生·渡尘之羽",
+    "Category": "符华",
+    "CharacterImage": "Assets\\崩坏三\\CharacterImage\\浮生·渡尘之羽_Main.png",
+    "BackgroundImage": "Assets\\崩坏三\\CharacterImage\\浮生·渡尘之羽_Background.png",
+    "ModNumber": ""
+  }
+]
