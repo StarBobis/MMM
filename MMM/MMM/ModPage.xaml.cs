@@ -23,6 +23,7 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using Newtonsoft.Json;
 using MMM_Core.Utils;
 using Windows.Services.Maps;
+using Microsoft.UI.Xaml.Hosting;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -53,7 +54,7 @@ namespace MMM
             CategoryItemGridView.SelectedIndex = 0;
         }
 
-
+     
         private ModItem GetCurrentSelectedModItem()
         {
             if (ModItemGridView.SelectedItem != null)
@@ -67,6 +68,8 @@ namespace MMM
                 return null;
             }
         }
+
+
         public CategoryItem GetCurrentSelectedCategoryItem()
         {
             if (CategoryItemGridView.SelectedItem != null)

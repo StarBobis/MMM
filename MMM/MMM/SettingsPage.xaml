@@ -87,7 +87,26 @@
                                             </StackPanel.Background>
                                             <TextBlock HorizontalAlignment="Center" Margin="1" VerticalAlignment="Bottom" Text="{x:Bind CategoryNameName}" FontSize="11" FontWeight="Bold"/>
                                         </StackPanel>
-
+                                        <!-- 流光边框 -->
+                                        <Rectangle 
+ Grid.Row="0" Grid.RowSpan="2"
+ x:Name="FlowBorder"
+RadiusX="8" 
+RadiusY="8"
+StrokeThickness="2"
+Margin="-1">
+                                            <!-- 扩大边界以覆盖内容 -->
+                                            <Rectangle.Stroke>
+                                                <LinearGradientBrush x:Name="FlowBrush" 
+             StartPoint="0,0" 
+             EndPoint="1,1">
+                                                    <GradientStop Color="Transparent" Offset="0"/>
+                                                    <GradientStop Color="Gold" Offset="0.15"/>
+                                                    <GradientStop Color="LightGoldenrodYellow" Offset="0.75"/>
+                                                    <GradientStop Color="Transparent" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Rectangle.Stroke>
+                                        </Rectangle>
                                     </Grid>
                                 </GridViewItem>
 
@@ -215,6 +234,26 @@ The following sets the maximum # of items to show before wrapping.-->
 
                                             <TextBlock HorizontalAlignment="Center" Text="{x:Bind CharacterName}" FontWeight="Bold"/>
                                         </StackPanel>
+                                        <!-- 流光边框 -->
+                                        <Rectangle 
+ Grid.Row="0" Grid.RowSpan="2"
+ x:Name="FlowBorder"
+RadiusX="8" 
+RadiusY="8"
+StrokeThickness="2"
+Margin="-1">
+                                            <!-- 扩大边界以覆盖内容 -->
+                                            <Rectangle.Stroke>
+                                                <LinearGradientBrush x:Name="FlowBrush" 
+             StartPoint="0,0" 
+             EndPoint="1,1">
+                                                    <GradientStop Color="Transparent" Offset="0"/>
+                                                    <GradientStop Color="PaleGoldenrod" Offset="0.15"/>
+                                                    <GradientStop Color="LightGoldenrodYellow" Offset="0.75"/>
+                                                    <GradientStop Color="Transparent" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Rectangle.Stroke>
+                                        </Rectangle>
                                     </Grid>
                                 </GridViewItem>
                             </DataTemplate>
