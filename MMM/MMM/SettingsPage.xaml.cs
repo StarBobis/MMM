@@ -375,8 +375,6 @@ namespace MMM
             {
                 int index = CharacterItemGridView.SelectedIndex;
 
-               
-
 
                 string CategoryImageCachePath = Path.Combine(GlobalConfig.Path_Base, CharacterItemList[index].CharacterImage);
                 string CategoryBackgroundImageCachePath = Path.Combine(GlobalConfig.Path_Base, CharacterItemList[index].BackgroundImage);

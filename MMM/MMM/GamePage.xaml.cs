@@ -403,7 +403,9 @@ namespace MMM
             {
                 //切换到Play版本的d3d11.dll
                 string Path_Dev3DmigotoDll = GlobalConfig.Path_3DmigotoGameModForkFolder + "ReleaseX64Play\\d3d11.dll";
-                string Path_CurrentGame3DmigotoDll = GlobalConfig.Path_LoaderFolder + "d3d11.dll";
+                string Path_CurrentGame3DmigotoDll = Path.Combine(GlobalConfig.Path_LoaderFolder, "d3d11.dll");
+                Debug.WriteLine(Path_CurrentGame3DmigotoDll);
+
                 try
                 {
                     File.Copy(Path_Dev3DmigotoDll, Path_CurrentGame3DmigotoDll, true);
@@ -418,7 +420,7 @@ namespace MMM
             {
                 //切换到开发版本的d3d11.dll
                 string Path_Dev3DmigotoDll = GlobalConfig.Path_3DmigotoGameModForkFolder + "ReleaseX64Dev\\d3d11.dll";
-                string Path_CurrentGame3DmigotoDll = GlobalConfig.Path_LoaderFolder + "d3d11.dll";
+                string Path_CurrentGame3DmigotoDll = Path.Combine(GlobalConfig.Path_LoaderFolder, "d3d11.dll");
                 try
                 {
                     File.Copy(Path_Dev3DmigotoDll, Path_CurrentGame3DmigotoDll, true);
@@ -455,6 +457,57 @@ namespace MMM
                 {
                     IAsyncOperation<bool> asyncOperation = Launcher.LaunchUriAsync(new Uri(link));
                 }
+            }
+        }
+
+        private void ToggleSwitch_ShowWarning_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (ToggleSwitch_ShowWarning.IsOn)
+            {
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI,"[Logging]", "dev", "0");
+            }
+            else
+            {
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI,"[Logging]", "dev", "1");
+            }
+        }
+
+        private async void ProcessPathTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI, "[loader]", "target", ProcessPathTextBox.Text);
+            }
+            catch (Exception ex)
+            {
+                await MessageHelper.Show("保存失败：" + ex.ToString());
+            }
+        }
+
+        private async void StarterPathTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI, "[loader]", "launch", StarterPathTextBox.Text);
+            }
+            catch (Exception ex)
+            {
+                await MessageHelper.Show("保存失败：" + ex.ToString());
+            }
+        }
+
+        private async void TextBox_LaunchArgs_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+                D3dxIniConfig.SaveAttributeToD3DXIni(GlobalConfig.Path_D3DXINI, "[loader]", "launch_args", TextBox_LaunchArgs.Text);
+            }
+            catch (Exception ex)
+            {
+                await MessageHelper.Show("保存失败：" + ex.ToString());
             }
         }
     }

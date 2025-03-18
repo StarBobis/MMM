@@ -75,7 +75,7 @@ namespace MMM_Core
                     foreach (string line in lines)
                     {
                         string trim_lower_line = line.Trim().ToLower();
-                        if (trim_lower_line.StartsWith(SectionName))
+                        if (trim_lower_line.StartsWith(SectionName.Trim().ToLower()))
                         {
                             newLines.Add(line);
                             string TargetPath = AttributeName + " = " + AttributeValue;

@@ -212,6 +212,7 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                             x:Name="ToggleSwitch_ShowWarning" 
                             OnContent="屏蔽游戏内红字" 
                             OffContent="显示游戏内红字" 
+                            Toggled="ToggleSwitch_ShowWarning_Toggled"
                             ToolTipService.ToolTip="开启后游戏中将不会显示红字报错，适用于纯享游戏，关闭后将显示红字报错"/>
                         <ToggleSwitch 
                             VerticalAlignment="Center" 
@@ -249,7 +250,7 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 <!-- 进程路径 -->
                 <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,0,20,10" ToolTipService.ToolTip="一般为游戏的主程序进程路径，可以在任务管理器中查看">
                     <TextBlock x:Name="TextBlock_ChooseProcessPath" Text="进程路径:" VerticalAlignment="Center" Margin="10,0,10,0" Foreground="White"/>
-                    <TextBox x:Name="ProcessPathTextBox" Width="550"/>
+                    <TextBox x:Name="ProcessPathTextBox" Width="550" TextChanged="ProcessPathTextBox_TextChanged"/>
                     <Button 
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"  
@@ -266,7 +267,7 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 <!-- 启动器路径 -->
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,0,0,0" ToolTipService.ToolTip="一般为游戏的启动器或者进程路径，如果是启动器则运行3Dmigoto Loader.exe后将自动调起启动器方便手动启动，如果是游戏进程将自动调起游戏进程实现一键启动，除了米的游戏外直接填进程路径一般需要额外填写对应的启动参数">
                     <TextBlock x:Name="TextBlock_ChooseStarterPath" Text="启动路径:" VerticalAlignment="Center" Margin="10,0,10,0" Foreground="White"/>
-                    <TextBox x:Name="StarterPathTextBox" Width="550" />
+                    <TextBox x:Name="StarterPathTextBox" Width="550" TextChanged="StarterPathTextBox_TextChanged"/>
                     <Button 
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"  
@@ -285,7 +286,7 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                 <!-- 启动参数 -->
                 <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="10,10,0,0" ToolTipService.ToolTip="进程的启动参数，如果进程路径和启动路径填写的内容一样则需要一般填写启动参数" >
                     <TextBlock x:Name="TextBlock_LaunchArgs" Text="启动参数:" VerticalAlignment="Center" Margin="10,0,10,0" Foreground="White"/>
-                    <TextBox x:Name="TextBox_LaunchArgs" Width="550" />
+                    <TextBox x:Name="TextBox_LaunchArgs" Width="550" TextChanged="TextBox_LaunchArgs_TextChanged"/>
                 </StackPanel>
 
                 <!-- 按钮 -->
@@ -298,14 +299,14 @@ HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,90,40"
                         Margin="0,0,10,10" 
                         Click="Button_InitializePath_Click"
                         ToolTipService.ToolTip="清除当前填写的所有配置，方便重新填写"/>
-                    <Button 
+                    <!--<Button 
                         x:Name="Button_SaveConfig" 
                         Content="保存配置" 
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"  
                         Margin="0,0,10,10" 
                         Click="Button_SaveConfig_Click"
-                        ToolTipService.ToolTip="保存当前的配置到d3dx.ini"/>
+                        ToolTipService.ToolTip="保存当前的配置到d3dx.ini"/>-->
                     <Button 
                         x:Name="Button_OpenD3DXINI" 
                         Content="打开d3dx.ini" 
